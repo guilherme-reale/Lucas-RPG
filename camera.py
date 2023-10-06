@@ -12,6 +12,6 @@ class CameraGroup(pygame.sprite.Group):
         
         self.offset.x = player.rect.centerx - WIDTH//2
         self.offset.y = player.rect.centery - HEIGHT//2
-        for sprite in self.sprites():
+        for sprite in sorted(self.sprites(),key = lambda sprite:sprite.rect.centery):
             offset_pos = sprite.rect.center - self.offset
             self.display_surface.blit(sprite.image,offset_pos)
