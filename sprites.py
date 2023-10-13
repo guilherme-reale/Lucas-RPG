@@ -3,7 +3,7 @@ import math
 import random
 from config import *
 import player_data as pd
-from text import Text
+from text import *
 
 class Spritesheet:
     def __init__(self,file):
@@ -51,6 +51,7 @@ class Player(pygame.sprite.Sprite):
         self.text_index = 0  
         
         self.last_clicked_time = 0
+        self.snip = 1
         
         
         
@@ -121,10 +122,13 @@ class Player(pygame.sprite.Sprite):
     def danger_collision(self):
         for sprite in self.danger_sprites:
             if self.hitbox.colliderect(sprite.rect):
-                if self.steps>100 and random.randint(0,100) < 5:
+                if self.steps>100 and random.randint(0,200) < 1:
                     self.battle_time = True
                     self.steps = 0
-    
+                
+                
+    def true_to_false(self): self.battle_time = False
+        
     def collision (self,direction):
         if direction == 'horizontal':
             for sprite in self.obstacle_sprites:
@@ -155,12 +159,16 @@ class Player(pygame.sprite.Sprite):
                  
     def npc_text(self):
         if self.dialog_open and self.pause:
-            npc_text = Text(self.current_npc.text[self.text_index], 22, 0, 0)
+            #npc_text = Text(self.current_npc.text[self.text_index], 22, 0, 0)
+            #npc_text.draw_box((WIDTH, HEIGHT/6), (0, 0), self.surface,True,2)
+            npc_text = ScrollingText(self.current_npc.text[self.text_index], 22, 0, 0,self.snip)
             npc_text.draw_box((WIDTH, HEIGHT/6), (0, 0), self.surface,True,2)
+            self.snip+=npc_text.speed
             current_time = pygame.time.get_ticks()
             if pygame.mouse.get_pressed()[0] and current_time - self.last_clicked_time > 500:
                 self.last_clicked_time = current_time
                 self.text_index += 1
+                self.snip = 1
                 if self.text_index >= len(self.current_npc.text):
                     self.text_index = 0  
                     self.dialog_open = self.pause = False

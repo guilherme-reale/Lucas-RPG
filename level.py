@@ -31,15 +31,15 @@ class Level:
                     Tile("img/rock.png",(x,y),[self.visible_sprites,self.obstacle_sprites])
                 if col == 'p':
                     if pd.player_data['pos_x'] == 0 and pd.player_data['pos_y'] == 0:
-                        self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites,self.danger_sprites,self.npc_sprites)
+                        self.player_pos = (x,y)
                     else:
-                        self.player = Player((pd.player_data['pos_x'],pd.player_data['pos_y']),[self.visible_sprites],self.obstacle_sprites,self.danger_sprites,self.npc_sprites)
+                        self.player_pos =(pd.player_data['pos_x'],pd.player_data['pos_y']) 
                 if col == 'd':
                     DangerZone((x,y),[self.visible_sprites,self.danger_sprites])
                 if col == 'n':
                     Npc("img/NPC-Test.png",(x,y),npc_text['npc1'],[self.visible_sprites,self.obstacle_sprites,self.npc_sprites])
                 
-                    
+        self.player = Player(self.player_pos,[self.visible_sprites],self.obstacle_sprites,self.danger_sprites,self.npc_sprites)            
                 
     def run(self):
         self.visible_sprites.custom_draw(self.player)

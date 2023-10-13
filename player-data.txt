@@ -1,1 +1,1 @@
-{"pos_x": 635, "pos_y": 95, "hp_max": 0, "atk": 0, "def": 0, "coins": 0, "exp": 0, "lvl": 0, "time": 0}
+{"pos_x": 937, "pos_y": 1096, "hp_max": 0, "atk": 0, "def": 0, "coins": 0, "exp": 0, "lvl": 0, "time": 0}

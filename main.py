@@ -22,12 +22,7 @@ class Game:
         self.font = pygame.font.Font(MAIN_FONT,32)
         #Eventos definem o que será mostrado em cada momento do jogo
         self.event = 'TITLE SCREEN'
-        
-        #instância da fase
-        self.level = Level()
-        #instância da tela de batalhas
-        self.battle_phase = Battle()
-
+    
         game_icon = pygame.transform.scale2x(pygame.image.load("img/NPC-Test.png").convert_alpha())
         pygame.display.set_icon(game_icon)
         
@@ -40,6 +35,10 @@ class Game:
             with open('player-data.txt','w') as store_file:
                 json.dump(pd.player_data,store_file)
         
+        #instância da fase
+        self.level = Level()
+        #instância da tela de batalhas
+        self.battle_phase = Battle()
         
     def main_game(self):
         while True:
@@ -75,6 +74,7 @@ class Game:
     #Movimentação no cenário
     def overworld(self):
         self.screen.fill("#5D8AA8")
+        self.battle_phase.event = ''
         self.level.run()
         if self.level.player.battle_time == True:
             self.event = 'BATTLE'
@@ -82,6 +82,9 @@ class Game:
     #tela de batalhas        
     def battle(self):
         self.battle_phase.run()
+        if self.battle_phase.event == "OVERWORLD":
+            self.level.player.true_to_false()
+            self.event = 'OVERWORLD'
         
         
 game= Game()
