@@ -17,10 +17,10 @@ class Text:
         self.color = WHITE
 
         # Cria uma superfície de texto
-        self.rendered_text = self.font.render(self.text, False, self.color)
+        self.image = self.font.render(self.text, False, self.color)
 
         # Obtém o retângulo da superfície de texto
-        self.rect = self.rendered_text.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
         
     def draw_box(self,boxSize,boxPos,surface,drawBorder=False,borderWidth=1):
@@ -33,31 +33,35 @@ class Text:
     
     def new_text(self, new_text):
         self.text = new_text
-        self.rendered_text = self.font.render(self.text, False, self.color)
-        self.rect = self.rendered_text.get_rect()
+        self.image = self.font.render(self.text, False, self.color)
+        self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
 
     def draw(self, surface):
-        surface.blit(self.rendered_text, self.rect.topleft)
+        surface.blit(self.image, self.rect.topleft)
         
-class Buttons(Text):
+class Button(Text):
     def __init__(self,text,font_size,x,y,font=MAIN_FONT):
         super().__init__(text,font_size,x,y,font=MAIN_FONT)
-        #pygame.sprite.Sprite.__init__(group)
+        
         self.last_clicked_time = 0
+        self.is_mouse_pressed = False
         
     def hover(self):
         mousepos = pygame.mouse.get_pos()
         if self.rect.collidepoint(mousepos):
-            self.rendered_text = self.font.render(self.text,False,YELLOW)
+            self.image = self.font.render(self.text,False,YELLOW)
         else:
-            self.rendered_text = self.font.render(self.text,False,WHITE)
-    def clicked(self):
-        mousePos= pygame.mouse.get_pos()
-        current_time = pygame.time.get_ticks()
-        if self.rect.collidepoint(mousePos) and pygame.mouse.get_pressed()[0] and current_time - self.last_clicked_time > 1000:
-            self.last_clicked_time = current_time
-            return True
+            self.image = self.font.render(self.text,False,WHITE)
+            
+    def on_click(self):
+        self.is_mouse_pressed = True
+    
+    def release_click(self): self.is_mouse_pressed = False
+    
+    def update(self):
+        self.hover()
+        
         
 
 class ScrollingText(Text):
@@ -82,6 +86,31 @@ class ScrollingText(Text):
             self.current_rect = self.current_image.get_rect(topleft = (self.x,self.y))
             surface.blit(self.current_image,self.current_rect)
         else:
-            surface.blit(self.rendered_text,self.rect)
+            surface.blit(self.image,self.rect)
         
         
+class TextDisplay:
+    def __init__(self, font_size, x, y, max_lines, width, height,font=MAIN_FONT):
+        self.font = pygame.font.Font(font, font_size)
+        self.x = x
+        self.y = y
+        self.max_lines = max_lines
+        self.width = width
+        self.height = height
+        self.lines = []
+    
+    def add_message(self, message):
+        self.lines.append(message)
+        if len(self.lines) > self.max_lines:
+            self.lines.pop(0)
+    
+    def draw(self, screen):
+        text_y = self.y
+        for line in self.lines:
+            text_surface = self.font.render(line, False, WHITE)
+            text_rect = text_surface.get_rect(topleft=(self.x, text_y))
+            screen.blit(text_surface, text_rect)
+            text_y += text_rect.height
+
+    def clear(self):
+        self.lines = []

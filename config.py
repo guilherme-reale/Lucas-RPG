@@ -16,7 +16,15 @@ PLAYER_HEIGHT = 17
 
 MAIN_FONT = "font/PixeloidSans-mLxMm.ttf"
 
-PLAYER_IDLE = "img/Char_one/Char_4_sides.png"
+PLAYER_IDLE = "img/Personagem Principal/personagem pricipal parado.png"
+
+PLAYER_MOVING = "img/Personagem Principal/personagem pricipal em movimento.png"
+
+PLASTICO = "img/enemies/enemy-test.jpeg"
+
+ENEMY_POSITION = (WIDTH/2,100)
+
+POTION_HP = 15
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
@@ -29,7 +37,7 @@ WORLD_MAP = [
 ['x',' ','p',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','x'],
 ['x',' ',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ','x',' ',' ',' ',' ',' ','x'],
 ['x',' ',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ','x',' ',' ',' ',' ',' ','x'],
-['x',' ',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ','x',' ',' ',' ',' ',' ','x'],
+['x',' ',' ','x',' ',' ',' ','q','r','o','m',' ',' ','x',' ',' ',' ',' ',' ','x'],
 ['x',' ',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ','x',' ',' ',' ',' ',' ','x'],
 ['x',' ',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ','x',' ',' ',' ',' ',' ','x'],
 ['x',' ',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ','x',' ',' ',' ',' ',' ','x'],

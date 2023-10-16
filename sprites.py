@@ -11,10 +11,10 @@ class Spritesheet:
     
     def get_sprite(self,x,y,width,height,scale=1):
              
-        sprite = pygame.Surface((width,height))
+        sprite = pygame.Surface((width,height),pygame.SRCALPHA)
         sprite.blit(self.sheet,(0,0),(x,y,width,height))
         sprite = pygame.transform.scale(sprite,(width*scale,height*scale))
-        sprite.set_colorkey(BLACK)
+        #sprite.set_colorkey(BLACK)
         
         return sprite
         
@@ -48,11 +48,13 @@ class Player(pygame.sprite.Sprite):
         self.surface = pygame.display.get_surface()
         
         self.dialog_open = False  
+        self.menu_open = False
         self.text_index = 0  
         
         self.last_clicked_time = 0
         self.snip = 1
         
+        self.emotes = Spritesheet("img/emotes/emotes.png")
         
         
     def movement_input(self):
@@ -61,22 +63,22 @@ class Player(pygame.sprite.Sprite):
             self.direction.y = -1
             self.direction.x = 0
             self.orientation = 'UP'
-            self.animation("img/Char_one/Walk/Char_walk_up.png")
+            self.animation('UP')
         elif keys[pygame.K_a]:
             self.direction.y = 0
             self.direction.x = -1
             self.orientation = 'LEFT'
-            self.animation("img/Char_one/Walk/Char_walk_left.png") 
+            self.animation('LEFT') 
         elif keys[pygame.K_s]:
             self.direction.y = 1
             self.direction.x = 0
             self.orientation = 'DOWN'
-            self.animation("img/Char_one/Walk/Char_walk_down.png")
+            self.animation('DOWN')
         elif keys[pygame.K_d]:
             self.direction.y = 0
             self.direction.x = 1
             self.orientation = 'RIGHT'
-            self.animation("img/Char_one/Walk/Char_walk_right.png")
+            self.animation('RIGHT')
         else:
             self.direction.x = 0
             self.direction.y = 0 
@@ -94,11 +96,21 @@ class Player(pygame.sprite.Sprite):
             self.image = self.player_spritesheet.get_sprite(48,0,16,PLAYER_HEIGHT,4)
         
     
-    def animation(self,file):
+    def animation(self,orientation):
         player_movement = []
-        player_movement_sheet = Spritesheet(file)
-        for i in range(6):
-            player_movement.append(player_movement_sheet.get_sprite(i*16,0,16,PLAYER_HEIGHT,4))
+        player_movement_sheet = Spritesheet(PLAYER_MOVING)
+        
+        if orientation == 'UP':
+            height = 32
+        elif orientation == 'DOWN':
+            height = 0
+        elif orientation == "LEFT":
+            height = 16
+        elif orientation == 'RIGHT':
+            height = 48
+            
+        for i in range(4):
+            player_movement.append(player_movement_sheet.get_sprite(i*16,height,16,PLAYER_HEIGHT,4))
         self.image = player_movement[int(self.loop)]
         self.loop+=0.1
         self.loop%=len(player_movement)
@@ -128,6 +140,33 @@ class Player(pygame.sprite.Sprite):
                 
                 
     def true_to_false(self): self.battle_time = False
+    def pause_player(self): self.pause = True
+    def unpause_player(self): self.pause = False
+    
+    def menu(self):
+        mousekeys = pygame.mouse.get_pressed()
+        current_time = pygame.time.get_ticks()
+        if mousekeys[2] and current_time - self.last_clicked_time > 1000:
+            self.last_clicked_time = current_time
+            self.pause = not self.pause
+            self.menu_open = not self.menu_open
+    
+    def menu_screen(self):
+        menu_surface = pygame.Surface((WIDTH*0.22,HEIGHT*0.8))
+        menu_surface.fill(BLACK)
+        menu_rect = menu_surface.get_rect()
+        menu_rect.center = (WIDTH*0.75,HEIGHT*0.5)
+        menu_text = [Text(f"HP: {pd.player_data['hp']}/{pd.player_data['hp_max']}",32,20,20),
+                    Text(f"ATAQUE: {pd.player_data['atk']}",32,20,80),
+                    Text(f"DEFESA: {pd.player_data['def']}",32,20,140),
+                    Text(f"POÇÃO: {pd.player_data['potion']}",32,20,300),
+                    Text(f"EXP: {pd.player_data['atk']}",32,20,360),
+                    Text(f"TOKENS: {pd.player_data['atk']}",32,20,420),
+                    ]
+        for text in menu_text:
+            text.draw(menu_surface)
+        self.surface.blit(menu_surface,menu_rect)
+        pygame.draw.rect(self.surface,WHITE,menu_rect,5)
         
     def collision (self,direction):
         if direction == 'horizontal':
@@ -173,13 +212,21 @@ class Player(pygame.sprite.Sprite):
                     self.text_index = 0  
                     self.dialog_open = self.pause = False
 
-       
+    def exclamation_emote(self):
+        ex_emote = self.emotes.get_sprite(66,42,10,14,2)
+        #ex_emote = pygame.image.load("img/emotes/exclamation mark.png").convert_alpha()
+        ex_rect = ex_emote.get_rect()
+        ex_rect.center = (WIDTH/2,HEIGHT/2)
+        self.surface.blit(ex_emote,ex_rect)  
     def update(self):
         if self.pause == False:
             self.movement_input()
             self.moviment()
             self.npc_collision()  
-        self.npc_text()     
+        self.npc_text()
+        self.menu() 
+        if self.menu_open:
+            self.menu_screen()    
 
 class Npc(pygame.sprite.Sprite):
     def __init__(self,image,pos,text,group,item=None):

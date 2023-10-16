@@ -23,7 +23,7 @@ class Game:
         #Eventos definem o que será mostrado em cada momento do jogo
         self.event = 'TITLE SCREEN'
     
-        game_icon = pygame.transform.scale2x(pygame.image.load("img/NPC-Test.png").convert_alpha())
+        game_icon = pygame.transform.scale2x(pygame.image.load("img/NPC_s/NPC-Test.png").convert_alpha())
         pygame.display.set_icon(game_icon)
         
         #carrega o save com as informações do jogador    
@@ -40,9 +40,14 @@ class Game:
         #instância da tela de batalhas
         self.battle_phase = Battle()
         
+        self.animation_counter = 0
+        self.time_counter = 0
+       
+        
     def main_game(self):
         while True:
-            for event in pygame.event.get():
+            events = pygame.event.get()
+            for event in events:
                 #opção de fechar janela
                 if event.type == pygame.QUIT:
                     #salva o jogo
@@ -58,7 +63,7 @@ class Game:
             elif self.event == 'OVERWORLD':
                 self.overworld()
             elif self.event == 'BATTLE':
-                self.battle()
+                self.battle(events)
             pygame.display.update()
             self.clock.tick(FPS)
     
@@ -75,16 +80,55 @@ class Game:
     def overworld(self):
         self.screen.fill("#5D8AA8")
         self.battle_phase.event = ''
+        self.battle_phase.state = 0
         self.level.run()
         if self.level.player.battle_time == True:
-            self.event = 'BATTLE'
+            self.level.player.pause_player()
+            self.level.player.exclamation_emote()
+            self.time_counter+=0.1
+            if self.time_counter >=6: 
+                if self.battle_transition():
+                    self.time_counter = 0
+                    self.event = "BATTLE"
     
     #tela de batalhas        
-    def battle(self):
-        self.battle_phase.run()
+    def battle(self,events):
+        self.battle_phase.run(self.screen,events)
         if self.battle_phase.event == "OVERWORLD":
             self.level.player.true_to_false()
+            self.level.player.unpause_player()
             self.event = 'OVERWORLD'
+    
+    def battle_transition(self):
+        # Usar pygame.SRCALPHA para suporte a canal alfa
+        surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)  
+        # alpha = 0
+
+        # while alpha < 255:
+        #     # Preencha a superfície com uma cor preta e uma transparência baseada em 'alpha'
+        #     surface.fill((0, 0, 0, alpha))
+        #     self.screen.blit(surface, (0, 0))
+        #     # Atualiza a tela a cada quadro
+        #     pygame.display.flip()
+        #     # Atraso para controlar a velocidade de escurecimento  
+        #     pygame.time.delay(10)
+        #     # Ajuste a velocidade como desejado  
+        #     alpha += 2  
+
+        # # Quando o escurecimento estiver completo, retorne True
+        # return True
+
+        
+        self.battle_phase.render(surface)
+        rect = surface.get_rect()
+        rect.topright = (0+self.animation_counter,0)
+        self.screen.blit(surface,rect)
+        self.animation_counter+=15
+        if rect.topright[0] >= WIDTH:
+            self.animation_counter = 0
+            return True
+        else:
+            return False
         
         
 game= Game()
