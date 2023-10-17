@@ -1,9 +1,10 @@
 import pygame
 import math
 import random
-from config import *
-import player_data as pd
-from text import *
+
+import lib.gameData as gameData
+from lib.text import *
+from lib.config import *
 
 class Spritesheet:
     def __init__(self,file):
@@ -58,31 +59,26 @@ class Player(pygame.sprite.Sprite):
         
         
     def movement_input(self):
-        keys = pygame.key.get_pressed()        
+        keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
-            self.direction.y = -1
-            self.direction.x = 0
-            self.orientation = 'UP'
-            self.animation('UP')
+            self.add_movement(-1, 0, 'UP')
         elif keys[pygame.K_a]:
-            self.direction.y = 0
-            self.direction.x = -1
-            self.orientation = 'LEFT'
-            self.animation('LEFT') 
+            self.add_movement(0, -1, 'LEFT')
         elif keys[pygame.K_s]:
-            self.direction.y = 1
-            self.direction.x = 0
-            self.orientation = 'DOWN'
-            self.animation('DOWN')
+            self.add_movement(1, 0, 'DOWN')
         elif keys[pygame.K_d]:
-            self.direction.y = 0
-            self.direction.x = 1
-            self.orientation = 'RIGHT'
-            self.animation('RIGHT')
+            self.add_movement(0, 1, 'RIGHT')
         else:
             self.direction.x = 0
             self.direction.y = 0 
             self.idle(self.orientation)
+
+    # TODO Rename this here and in `movement_input`
+    def add_movement(self, arg0, arg1, arg2):
+        self.direction.y = arg0
+        self.direction.x = arg1
+        self.orientation = arg2
+        self.animation(arg2)
         
         
     def idle(self,orientation):
@@ -126,8 +122,8 @@ class Player(pygame.sprite.Sprite):
         self.collision('vertical')
         self.rect.center = self.hitbox.center
         
-        pd.player_data['pos_x'] = self.hitbox.x
-        pd.player_data['pos_y'] = self.hitbox.y
+        gameData.player_data['pos_x'] = self.hitbox.x
+        gameData.player_data['pos_y'] = self.hitbox.y
                 
         self.danger_collision()
         
@@ -156,12 +152,12 @@ class Player(pygame.sprite.Sprite):
         menu_surface.fill(BLACK)
         menu_rect = menu_surface.get_rect()
         menu_rect.center = (WIDTH*0.75,HEIGHT*0.5)
-        menu_text = [Text(f"HP: {pd.player_data['hp']}/{pd.player_data['hp_max']}",32,20,20),
-                    Text(f"ATAQUE: {pd.player_data['atk']}",32,20,80),
-                    Text(f"DEFESA: {pd.player_data['def']}",32,20,140),
-                    Text(f"POÇÃO: {pd.player_data['potion']}",32,20,300),
-                    Text(f"EXP: {pd.player_data['atk']}",32,20,360),
-                    Text(f"TOKENS: {pd.player_data['atk']}",32,20,420),
+        menu_text = [Text(f"HP: {gameData.player_data['hp']}/{gameData.player_data['hp_max']}",32,20,20),
+                    Text(f"ATAQUE: {gameData.player_data['atk']}",32,20,80),
+                    Text(f"DEFESA: {gameData.player_data['def']}",32,20,140),
+                    Text(f"POÇÃO: {gameData.player_data['potion']}",32,20,300),
+                    Text(f"EXP: {gameData.player_data['atk']}",32,20,360),
+                    Text(f"TOKENS: {gameData.player_data['atk']}",32,20,420),
                     ]
         for text in menu_text:
             text.draw(menu_surface)

@@ -1,5 +1,6 @@
 import pygame
-from config import *
+
+from lib.config import *
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):

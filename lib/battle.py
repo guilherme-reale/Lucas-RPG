@@ -1,9 +1,11 @@
 import pygame
 import random
-from config import *
-from text import *
-import player_data as pd
-from battle_classes import PlayerBattle,Enemy
+
+from lib.battleClasses import PlayerBattle,Enemy
+from lib.text import *
+from lib.config import *
+
+
 
 class BattleState:
     PLAYER = 0
@@ -24,16 +26,17 @@ class Battle:
         self.pocao = Button("POÇÃO",self.rect_font,self.main_rect_rect.left+self.rect_size/2,HEIGHT-100)
         self.correr = Button("CORRER",self.rect_font,self.main_rect_rect.left+self.rect_size*3/4,HEIGHT-100)
         self.buttons = [self.atacar,self.magia,self.pocao,self.correr]
-        self.text_display = TextDisplay(48, 100, HEIGHT//3, 5, WIDTH - 20, HEIGHT - 20)
+        self.text_display = TextDisplay(32, 100, HEIGHT//3, 5, WIDTH - 20, HEIGHT - 20)
         self.turn_count = 0
         self.processing = False 
         self.previous_time = 0
         self.player = PlayerBattle(self.buttons,self.text_display)
-        
+        self.enemy = Enemy(self.text_display)
         self.show_hp = Text(f"HP: {self.player.stats['hp']}",16,WIDTH//2,500)
         self.show_lvl = Text(f"LVL {self.player.stats['lvl']}",16,WIDTH//2 + 100,500)
         self.event = ''
-        self.counter = 0 
+        self.counter = 0
+        self.done = False
     def handle_events(self, events):
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN and not self.processing:
@@ -60,7 +63,10 @@ class Battle:
             
             if self.turn_count >= 1:  # Simulando fim do turno do jogador
                 self.turn_count = 0
-                self.state = BattleState.ENEMY
+                if self.enemy.hp > 0:
+                    self.state = BattleState.ENEMY
+                else:
+                    self.state = BattleState.VICTORY
 
         elif self.state == BattleState.ENEMY:
             if random.randint(0,2) > 0:
@@ -79,7 +85,25 @@ class Battle:
             if self.counter >= 12:
                 self.counter = 0
                 self.text_display.lines.clear()
+                self.enemy = Enemy(self.text_display)
                 self.event = 'OVERWORLD'
+        elif self.state == BattleState.VICTORY:
+            if not self.done:
+                self.text_display.add_message("Lucas derrotou o inimigo!")
+                self.player.winnings(self.enemy)
+                self.player.level_up()
+                self.player.update_stats()
+                self.player = PlayerBattle(self.buttons,self.text_display)
+                self.done = True
+            self.counter+=0.1
+            if self.counter>=12:
+                self.done = False
+                self.counter = 0
+                self.text_display.lines.clear()
+                self.enemy = Enemy(self.text_display)
+                self.event = 'OVERWORLD'
+            
+            
                 
         
 
@@ -96,7 +120,6 @@ class Battle:
         # Outros elementos da interface gráfica
 
     def run(self,screen,events):
-        self.enemy = Enemy(self.text_display)
         self.render(screen)
         self.handle_events(events)
         self.update()

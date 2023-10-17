@@ -2,12 +2,12 @@ import pygame
 import sys
 import json
 
-from level import Level
-from battle import Battle
-from sprites import *
-from text import Text
-from config import *
-import player_data as pd
+import lib.gameData as gameData
+from lib.level import Level
+from lib.battle import Battle
+from lib.text import Text
+from lib.config import *
+
 
 
 class Game:
@@ -29,11 +29,11 @@ class Game:
         #carrega o save com as informações do jogador    
         try:
             with open('player-data.txt') as load_file:
-                pd.player_data = json.load(load_file)
+                gameData.player_data = json.load(load_file)
         except:
             #cria o save
             with open('player-data.txt','w') as store_file:
-                json.dump(pd.player_data,store_file)
+                json.dump(gameData.player_data,store_file)
         
         #instância da fase
         self.level = Level()
@@ -52,7 +52,7 @@ class Game:
                 if event.type == pygame.QUIT:
                     #salva o jogo
                     with open("player-data.txt",'w') as store_data:
-                        json.dump(pd.player_data,store_data)
+                        json.dump(gameData.player_data,store_data)
                         
                     pygame.quit()
                     sys.exit()
@@ -60,6 +60,8 @@ class Game:
             #definição dos eventos
             if self.event == 'TITLE SCREEN':
                 self.title_screen()
+            elif self.event == 'INTRODUCTION':
+                self.overworld()
             elif self.event == 'OVERWORLD':
                 self.overworld()
             elif self.event == 'BATTLE':
@@ -90,7 +92,9 @@ class Game:
                 if self.battle_transition():
                     self.time_counter = 0
                     self.event = "BATTLE"
-    
+                    
+    def introduction(self):
+        pass
     #tela de batalhas        
     def battle(self,events):
         self.battle_phase.run(self.screen,events)

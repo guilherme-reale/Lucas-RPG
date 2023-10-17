@@ -1,10 +1,12 @@
 import pygame
-from sprites import *
-from config import *
-from camera import CameraGroup
 import random
-from game_dialogue import *
-import player_data as pd
+
+from lib.sprites import *
+from lib.config import *
+from lib.camera import CameraGroup
+
+from lib.dialogue import *
+import lib.gameData as gameData
 
 class Level:
     def __init__(self):
@@ -30,10 +32,10 @@ class Level:
                 if col == 'x':
                     Tile("img/rock.png",(x,y),[self.visible_sprites,self.obstacle_sprites])
                 if col == 'p':
-                    if pd.player_data['pos_x'] == 0 and pd.player_data['pos_y'] == 0:
+                    if gameData.player_data['pos_x'] == 0 and gameData.player_data['pos_y'] == 0:
                         self.player_pos = (x,y)
                     else:
-                        self.player_pos =(pd.player_data['pos_x'],pd.player_data['pos_y']) 
+                        self.player_pos =(gameData.player_data['pos_x'],gameData.player_data['pos_y']) 
                 if col == 'd':
                     DangerZone((x,y),[self.visible_sprites,self.danger_sprites])
                 if col == 'n':

@@ -1,1 +1,1 @@
-{"pos_x": 266, "pos_y": 752, "hp_max": 20, "hp": 20, "atk": 10, "def": 10, "coins": 0, "potion": 2, "exp": 0, "lvl": 1, "time": 0}
+{"pos_x": 292, "pos_y": 992, "hp_max": 20, "hp": 1, "atk": 10, "def": 10, "coin": 127, "potion": 2, "exp": 160, "lvl": 1, "time": 0}

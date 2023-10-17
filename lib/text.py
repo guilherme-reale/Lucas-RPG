@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from lib.config import *
 
 class Text:
     def __init__(self,text, font_size, x, y,font=MAIN_FONT):
