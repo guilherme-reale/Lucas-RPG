@@ -1,9 +1,11 @@
-import pygame
-import random
+import pygame,random
+
+from lib.config import *
 
 player_data = {
-    'pos_x':0,
-    'pos_y':0,
+    'pos_x':None,
+    'pos_y':None,
+    'map': MAP_PLASTICO,
     'hp_max':20,
     'hp': 20,
     'atk':10,

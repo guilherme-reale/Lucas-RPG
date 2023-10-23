@@ -20,7 +20,7 @@ PLAYER_IDLE = "img/Personagem Principal/personagem pricipal parado.png"
 
 PLAYER_MOVING = "img/Personagem Principal/personagem pricipal em movimento.png"
 
-PLASTICO = "img/enemies/enemy-test.jpeg"
+PLASTICO = "img/enemies/Plastico.png"
 
 ENEMY_POSITION = (WIDTH/2,100)
 
@@ -29,6 +29,11 @@ POTION_HP = 15
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 YELLOW = (255,255,0)
+
+RECYCLE_SPRITES = "map/recycle_items.png"
+
+MAP_PLASTICO = 'map/map1.tmx'
+MAP_CENTRAL = 'map/map2.tmx'
 
 #mapa do jogo
 WORLD_MAP = [

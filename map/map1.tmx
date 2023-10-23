@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="123">
+ <tileset firstgid="1" name="16x16_terrain_Denzi130216-4" tilewidth="16" tileheight="16" tilecount="1550" columns="50">
+  <image source="16x16_terrain_Denzi130216-4.png" width="800" height="496"/>
+ </tileset>
+ <tileset firstgid="1551" name="recycle_items" tilewidth="16" tileheight="16" tilecount="128" columns="32">
+  <image source="recycle_items.png" width="515" height="64"/>
+ </tileset>
+ <tileset firstgid="1679" name="16x16_terrain_Denzi130216-4" tilewidth="16" tileheight="16" tilecount="1550" columns="50">
+  <image source="16x16_terrain_Denzi130216-4.png" width="800" height="496"/>
+ </tileset>
+ <layer id="1" name="Camada de Blocos 1" width="20" height="20">
+  <data encoding="csv">
+212,212,212,212,212,162,162,162,162,86,87,88,93,94,95,96,97,98,99,100,
+212,212,212,212,212,162,162,162,162,136,137,138,143,144,145,146,147,148,149,150,
+212,212,212,212,162,162,162,162,162,186,187,188,193,194,195,196,197,198,199,200,
+212,212,212,212,212,162,162,162,162,305,306,306,243,244,245,246,247,248,249,250,
+212,212,212,162,162,162,162,162,305,305,306,306,293,294,295,296,297,298,299,300,
+212,212,212,212,162,162,162,162,305,305,306,306,343,344,345,346,347,348,349,350,
+212,212,212,212,162,162,162,162,305,305,306,306,393,394,395,396,397,398,399,400,
+212,212,212,212,162,162,162,162,305,305,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,162,162,305,305,305,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,162,162,305,305,305,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,162,162,305,305,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,162,162,305,305,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,162,162,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,162,162,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,162,162,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,212,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,212,340,341,342,306,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,390,391,392,306,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,440,441,442,306,306,306,306,316,316,316,316,316,316,316,316
+</data>
+ </layer>
+ <objectgroup id="4" name="Camada de Objetos 1">
+  <object id="100" name="ground" x="0" y="0" width="5" height="320"/>
+  <object id="102" name="ground" x="314.5" y="0" width="5.5" height="320"/>
+  <object id="103" name="ground" x="0" y="314.5" width="320" height="5.5"/>
+  <object id="104" name="recycle1" x="97.5" y="13.5" width="4.5" height="8.5"/>
+  <object id="105" name="recycle1" x="101" y="80.5" width="2.5" height="9.5"/>
+  <object id="106" name="recycle1" x="16" y="81.5" width="4.5" height="7.5"/>
+  <object id="107" name="recycle2" x="14.5" y="217.5" width="3.5" height="5.5"/>
+  <object id="109" name="recycle3" x="51.5" y="219" width="4.5" height="5"/>
+  <object id="110" name="recycle1" x="100.5" y="128.5" width="3.5" height="6.5"/>
+  <object id="111" name="recycle1" x="244.25" y="37.75" width="4.5" height="7.5"/>
+  <object id="112" name="recycle1" x="250.25" y="63.75" width="4.5" height="7.5"/>
+  <object id="113" name="recycle1" x="214.25" y="82.25" width="4.5" height="7.5"/>
+  <object id="114" name="recycle1" x="247.25" y="83.75" width="4.5" height="7.5"/>
+  <object id="115" name="recycle1" x="280.75" y="57.75" width="4.5" height="7.5"/>
+  <object id="116" name="recycle1" x="273.75" y="37.75" width="4.5" height="7.5"/>
+  <object id="117" name="recycle3" x="273.75" y="128" width="4.5" height="5"/>
+  <object id="118" name="recycle3" x="273.75" y="153" width="4.5" height="5"/>
+  <object id="120" name="danger" x="193" y="99" width="120.5" height="215"/>
+  <object id="121" name="ground" x="1.5" y="1" width="143" height="3"/>
+  <object id="122" name="ground" x="193" y="1.5" width="127" height="3"/>
+ </objectgroup>
+</map>

@@ -1,9 +1,7 @@
-import pygame 
-import sys
-import json
+import pygame,sys,json
 
 import lib.gameData as gameData
-from lib.level import Level
+from lib.map import Map
 from lib.battle import Battle
 from lib.text import Text
 from lib.config import *
@@ -36,7 +34,8 @@ class Game:
                 json.dump(gameData.player_data,store_file)
         
         #instância da fase
-        self.level = Level()
+        #self.map = map()
+        self.map = Map()
         #instância da tela de batalhas
         self.battle_phase = Battle()
         
@@ -61,7 +60,7 @@ class Game:
             if self.event == 'TITLE SCREEN':
                 self.title_screen()
             elif self.event == 'INTRODUCTION':
-                self.overworld()
+                self.introduction()
             elif self.event == 'OVERWORLD':
                 self.overworld()
             elif self.event == 'BATTLE':
@@ -83,10 +82,10 @@ class Game:
         self.screen.fill("#5D8AA8")
         self.battle_phase.event = ''
         self.battle_phase.state = 0
-        self.level.run()
-        if self.level.player.battle_time == True:
-            self.level.player.pause_player()
-            self.level.player.exclamation_emote()
+        self.map.run()
+        if self.map.player.battle_time == True:
+            self.map.player.pause_player()
+            self.map.player.exclamation_emote()
             self.time_counter+=0.1
             if self.time_counter >=6: 
                 if self.battle_transition():
@@ -99,8 +98,8 @@ class Game:
     def battle(self,events):
         self.battle_phase.run(self.screen,events)
         if self.battle_phase.event == "OVERWORLD":
-            self.level.player.true_to_false()
-            self.level.player.unpause_player()
+            self.map.player.true_to_false()
+            self.map.player.unpause_player()
             self.event = 'OVERWORLD'
     
     def battle_transition(self):

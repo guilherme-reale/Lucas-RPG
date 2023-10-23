@@ -1,6 +1,4 @@
-import pygame
-import math
-import random
+import pygame,math,random
 
 import lib.gameData as gameData
 from lib.text import *
@@ -240,7 +238,7 @@ class Npc(pygame.sprite.Sprite):
             
         
 class Tile(pygame.sprite.Sprite):
-    def __init__(self,image,pos,group):
+    def __init__(self,image,pos,group,origin="center"):
         super().__init__(group)
         
         try:
@@ -248,7 +246,11 @@ class Tile(pygame.sprite.Sprite):
         except:
             self.image = image
             
-        self.rect = self.image.get_rect(center=pos)       
+        self.rect = self.image.get_rect()
+        if origin =='center':
+            self.rect.center = pos
+        elif origin =='topleft':
+            self.rect.topleft = pos
     
 class DangerZone(pygame.sprite.Sprite):
     def __init__(self,pos,group):

@@ -1,5 +1,4 @@
-import pygame
-import random
+import pygame,random
 
 import lib.gameData as gameData
 from lib.text import Text

@@ -1,5 +1,4 @@
-import pygame
-import random
+import pygame, random
 
 from lib.battleClasses import PlayerBattle,Enemy
 from lib.text import *
@@ -37,6 +36,7 @@ class Battle:
         self.event = ''
         self.counter = 0
         self.done = False
+        
     def handle_events(self, events):
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN and not self.processing:
