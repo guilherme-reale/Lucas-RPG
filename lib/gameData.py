@@ -5,25 +5,82 @@ from lib.config import *
 player_data = {
     'pos_x':None,
     'pos_y':None,
-    'map': MAP_PLASTICO,
+    'map': MAP_CENTRAL,
     'hp_max':20,
     'hp': 20,
     'atk':10,
     'def':10,
     'coin':0,
-    'potion':2,
+    'potion':3,
     'exp':0,
     'lvl':1,
     'time':0 
     
         }
 
-plastico_stats = {
+player_data_default = {
+    'pos_x':None,
+    'pos_y':None,
+    'map': MAP_CENTRAL,
+    'hp_max':20,
+    'hp': 20,
+    'atk':10,
+    'def':10,
+    'coin':0,
+    'potion':3,
+    'exp':0,
+    'lvl':1,
+    'time': 0
+    
+        }
+
+papelao_stats = {
     'hp_max': 20 + random.randint(0,3),
     'atk': 10 + random.randint(0,2),
     'def': 5 + random.randint(0,1),
-    'coin': 20,
+    'coin': 5,
     'exp': 40
     
     
 }
+
+plastico_stats = {
+    'hp_max': 30 + random.randint(0,3),
+    'atk': 14 + random.randint(0,2),
+    'def': 8 + random.randint(0,1),
+    'coin': 12,
+    'exp': 40
+    
+    
+}
+
+metal_stats = {
+    'hp_max': 38 + random.randint(0,5),
+    'atk': 22 + random.randint(0,2),
+    'def': 14 + random.randint(0,1),
+    'coin': 20,
+    'exp': 45
+    
+    
+}
+
+toxico_stats = {
+    'hp_max': 50 + random.randint(0,3),
+    'atk': 22 + random.randint(0,8),
+    'def': 12 + random.randint(0,2),
+    'coin': 28,
+    'exp': 50
+    
+    
+}
+
+boss_stats = {
+    'hp_max': 20 + random.randint(0,3),
+    'atk': 10 + random.randint(0,2),
+    'def': 5 + random.randint(0,1),
+    'coin': 20,
+    'exp': 65
+    
+    
+}
+

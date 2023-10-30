@@ -3,7 +3,8 @@ import pygame,sys,json
 import lib.gameData as gameData
 from lib.map import Map
 from lib.battle import Battle
-from lib.text import Text
+from lib.text import Text,Button
+from lib.titleScreen import TitleScreen
 from lib.config import *
 
 
@@ -24,14 +25,8 @@ class Game:
         game_icon = pygame.transform.scale2x(pygame.image.load("img/NPC_s/NPC-Test.png").convert_alpha())
         pygame.display.set_icon(game_icon)
         
-        #carrega o save com as informações do jogador    
-        try:
-            with open('player-data.txt') as load_file:
-                gameData.player_data = json.load(load_file)
-        except:
-            #cria o save
-            with open('player-data.txt','w') as store_file:
-                json.dump(gameData.player_data,store_file)
+        
+        
         
         #instância da fase
         #self.map = map()
@@ -39,20 +34,20 @@ class Game:
         #instância da tela de batalhas
         self.battle_phase = Battle()
         
+        self.title_screen_instance = TitleScreen()
+        
         self.animation_counter = 0
         self.time_counter = 0
        
         
     def main_game(self):
         while True:
+            gameData.player_data['time'] = str(pygame.time.get_ticks()//(1000*3600))+":"+ str(pygame.time.get_ticks()//(1000*60)%60)
             events = pygame.event.get()
             for event in events:
                 #opção de fechar janela
                 if event.type == pygame.QUIT:
-                    #salva o jogo
-                    with open("player-data.txt",'w') as store_data:
-                        json.dump(gameData.player_data,store_data)
-                        
+                    #fecha o jogo  
                     pygame.quit()
                     sys.exit()
                     
@@ -65,17 +60,16 @@ class Game:
                 self.overworld()
             elif self.event == 'BATTLE':
                 self.battle(events)
+            elif self.event == 'GAME OVER':
+                self.game_over()
             pygame.display.update()
             self.clock.tick(FPS)
     
     #tela inicial
     def title_screen(self):
-        screen_image = pygame.image.load("img/TITLE-SCREEN.png").convert_alpha()
-        screen_image = pygame.transform.scale(screen_image,(1280,720))
-        self.screen.blit(screen_image,(0,0))
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_RETURN]:
-            self.event = 'OVERWORLD'
+        self.title_screen_instance.event = 'TITLE SCREEN'
+        self.title_screen_instance.make_title(self.screen,self.map)
+        self.event = self.title_screen_instance.event
     
     #Movimentação no cenário
     def overworld(self):
@@ -101,6 +95,16 @@ class Game:
             self.map.player.true_to_false()
             self.map.player.unpause_player()
             self.event = 'OVERWORLD'
+        elif self.battle_phase.event == "GAME OVER":
+            self.event = "GAME OVER"
+            
+            
+    def game_over(self):
+        self.screen.fill(BLACK)
+        game_over_text = Text("Lucas foi derrotado!",43,WIDTH//2,HEIGHT//2,orientation='center')
+        game_over_text.draw(self.screen)
+        if pygame.mouse.get_pressed()[0]:
+            self.event = "TITLE SCREEN"
     
     def battle_transition(self):
         # Usar pygame.SRCALPHA para suporte a canal alfa

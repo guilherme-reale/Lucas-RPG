@@ -22,6 +22,12 @@ PLAYER_MOVING = "img/Personagem Principal/personagem pricipal em movimento.png"
 
 PLASTICO = "img/enemies/Plastico.png"
 
+PAPELAO = "img/enemies/Papelao.png"
+
+METAL = "img/enemies/Metal.png"
+
+TOXICO = "img/enemies/Toxico.png"
+
 ENEMY_POSITION = (WIDTH/2,100)
 
 POTION_HP = 15
@@ -30,10 +36,14 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 YELLOW = (255,255,0)
 
-RECYCLE_SPRITES = "map/recycle_items.png"
+RECYCLE_SPRITES = "img/tilesets/recycle_items.png"
 
-MAP_PLASTICO = 'map/map1.tmx'
-MAP_CENTRAL = 'map/map2.tmx'
+
+MAP_CENTRAL = 'map/CENTRAL.tmx'
+MAP_PLASTICO = 'map/PLASTICO.tmx'
+MAP_METAL ="map/METAL.tmx"
+MAP_PAPELAO = "map/PAPELAO.tmx"
+MAP_TOXICO = "map/TOXICO.tmx"
 
 #mapa do jogo
 WORLD_MAP = [

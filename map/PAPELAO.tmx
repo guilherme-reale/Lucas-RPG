@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="24">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="55">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
-  <image source="Overworld.png" trans="ffffff" width="640" height="576"/>
+  <image source="../img/tilesets/Overworld.png" trans="ffffff" width="640" height="576"/>
  </tileset>
  <layer id="1" name="Camada de Blocos 1" width="20" height="20">
   <data encoding="csv">
@@ -27,22 +27,53 @@
 1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,366,366,366,366,366,366,366,366
 </data>
  </layer>
- <objectgroup id="2" name="Camada de Objetos 1">
-  <object id="1" gid="563" x="85.3333" y="19.3333" width="16" height="16"/>
-  <object id="3" gid="563" x="118" y="34.6667" width="16" height="16"/>
-  <object id="4" gid="563" x="152" y="52" width="16" height="16"/>
-  <object id="5" gid="563" x="184" y="66.6667" width="16" height="16"/>
-  <object id="6" gid="563" x="217.333" y="83.3333" width="16" height="16"/>
-  <object id="7" gid="563" x="246" y="102" width="16" height="16"/>
-  <object id="9" gid="563" x="276" y="113.333" width="16" height="16"/>
-  <object id="12" gid="209" x="148.667" y="23.3333" width="16" height="16"/>
-  <object id="13" gid="209" x="0.666667" y="18" width="16" height="16"/>
-  <object id="14" gid="209" x="19.3333" y="19.3333" width="16" height="16"/>
-  <object id="15" gid="209" x="38" y="19.3333" width="16" height="16"/>
-  <object id="16" gid="209" x="54.6667" y="20" width="16" height="16"/>
-  <object id="17" gid="209" x="2" y="32.6667" width="16" height="16"/>
-  <object id="18" gid="209" x="19.3333" y="34" width="16" height="16"/>
-  <object id="19" gid="209" x="39.3333" y="34.6667" width="16" height="16"/>
-  <object id="20" gid="209" x="57.3333" y="35.3333" width="16" height="16"/>
+ <layer id="3" name="Camada de Blocos 2" width="20" height="20">
+  <data encoding="csv">
+209,209,209,209,209,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+209,209,209,209,209,0,563,0,0,209,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,563,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,563,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,563,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,563,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,563,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,563,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="4" name="Camada de Objetos 1">
+  <object id="25" name="ground" x="-0.384962" y="316.054" width="320.289" height="4.23459"/>
+  <object id="26" name="ground" x="316.824" y="0.384962" width="3.84962" height="318.364"/>
+  <object id="27" name="ground" x="1.15489" y="0.769925" width="319.904" height="4.23459"/>
+  <object id="28" name="ground" x="0.769925" y="0.769925" width="4.23459" height="142.821"/>
+  <object id="29" name="ground" x="0.769925" y="191.326" width="2.30977" height="128.577"/>
+  <object id="34" name="danger" x="8" y="194.667" width="181.333" height="122.667"/>
+  <object id="35" name="danger" x="94.6667" y="6.66667" width="219.333" height="117.333"/>
+  <object id="39" name="recycle5" x="21.3333" y="227.333" width="5.33333" height="8.66667"/>
+  <object id="40" name="recycle5" x="38" y="263.333" width="6" height="7.33333"/>
+  <object id="41" name="recycle4" x="70" y="264" width="6" height="8"/>
+  <object id="42" name="recycle6" x="99.3333" y="276" width="7.33333" height="9.33333"/>
+  <object id="43" name="recycle14" x="133.333" y="278" width="3.33333" height="4.66667"/>
+  <object id="44" name="recycle14" x="149.333" y="277.333" width="6.66667" height="6.66667"/>
+  <object id="45" name="recycle4" x="132" y="227.333" width="8" height="8"/>
+  <object id="46" name="recycle6" x="86" y="228.667" width="7.33333" height="6"/>
+  <object id="47" name="recycle4" x="38.6667" y="290" width="7.33333" height="8"/>
+  <object id="48" name="recycle6" x="182" y="34.6667" width="8" height="11.3333"/>
+  <object id="49" name="recycle14" x="214" y="36" width="6" height="13.3333"/>
+  <object id="50" name="recycle4" x="246" y="38" width="4" height="10"/>
+  <object id="51" name="recycle14" x="276" y="37.3333" width="6" height="6.66667"/>
+  <object id="52" name="recycle14" x="275.333" y="66.6667" width="6.66667" height="8"/>
+  <object id="53" name="recycle5" x="295.333" y="85.3333" width="4.66667" height="8.66667"/>
+  <object id="54" name="recycle4" x="146.667" y="21.3333" width="12" height="7.33333"/>
  </objectgroup>
 </map>

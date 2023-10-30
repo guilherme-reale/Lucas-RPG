@@ -30,12 +30,13 @@ class Battle:
         self.processing = False 
         self.previous_time = 0
         self.player = PlayerBattle(self.buttons,self.text_display)
-        self.enemy = Enemy(self.text_display)
+        
         self.show_hp = Text(f"HP: {self.player.stats['hp']}",16,WIDTH//2,500)
         self.show_lvl = Text(f"LVL {self.player.stats['lvl']}",16,WIDTH//2 + 100,500)
         self.event = ''
         self.counter = 0
         self.done = False
+        self.load_enemy = False
         
     def handle_events(self, events):
         for event in events:
@@ -52,7 +53,8 @@ class Battle:
                 self.buttons[0].release_click()
                 self.turn_count+=1
             elif self.buttons[1].is_mouse_pressed:
-                pass
+                self.state = self.player.player_magic(self.enemy)
+                self.buttons[1].release_click()
             elif self.buttons[2].is_mouse_pressed:
                 self.state = self.player.player_potion()
                 self.buttons[2].release_click()
@@ -77,7 +79,13 @@ class Battle:
             
             if self.turn_count >= 1:  # Simulando fim do turno do inimigo
                 self.turn_count = 0
-                self.state = BattleState.PLAYER
+                if self.player.stats['hp'] > 0:
+                    
+                    self.state = BattleState.PLAYER
+                
+                else:
+                    self.state = BattleState.GAME_OVER
+                
         elif self.state == BattleState.RUN:
             self.player.update_stats()
             self.player = PlayerBattle(self.buttons,self.text_display)
@@ -85,8 +93,9 @@ class Battle:
             if self.counter >= 12:
                 self.counter = 0
                 self.text_display.lines.clear()
-                self.enemy = Enemy(self.text_display)
+                self.load_enemy = False
                 self.event = 'OVERWORLD'
+                
         elif self.state == BattleState.VICTORY:
             if not self.done:
                 self.text_display.add_message("Lucas derrotou o inimigo!")
@@ -100,9 +109,21 @@ class Battle:
                 self.done = False
                 self.counter = 0
                 self.text_display.lines.clear()
-                self.enemy = Enemy(self.text_display)
+                self.load_enemy = False
                 self.event = 'OVERWORLD'
-            
+        
+        elif self.state == BattleState.GAME_OVER:
+            if not self.done:
+                self.text_display.add_message("Lucas foi derrotado!")
+                self.done = True
+            self.player = PlayerBattle(self.buttons,self.text_display)
+            self.counter+=0.1
+            if self.counter >= 12:
+                self.done = False
+                self.counter = 0
+                self.text_display.lines.clear()
+                self.load_enemy = False
+                self.event = 'GAME OVER'   
             
                 
         
@@ -117,10 +138,16 @@ class Battle:
         self.show_hp.draw(screen)
         self.show_hp.new_text(f"HP: {self.player.stats['hp']}")
         self.show_lvl.draw(screen)
+        
         # Outros elementos da interface gráfica
 
     def run(self,screen,events):
+        if not self.load_enemy:
+            self.enemy = Enemy(self.text_display)
+            self.load_enemy = True
+        
         self.render(screen)
+        self.enemy.draw(screen)
         self.handle_events(events)
         self.update()
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="133">
+ <tileset firstgid="1" name="16x16_old_map_dungeon_Denzi090523-3" tilewidth="16" tileheight="16" tilecount="286" columns="26">
+  <image source="../img/tilesets/16x16_old_map_dungeon_Denzi090523-3.PNG.png" trans="ffffff" width="416" height="176"/>
+ </tileset>
+ <tileset firstgid="287" name="Overworld" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
+  <image source="../img/tilesets/Overworld.png" trans="ffffff" width="640" height="576"/>
+ </tileset>
+ <tileset firstgid="1727" name="recycle_items" tilewidth="16" tileheight="16" tilecount="128" columns="32">
+  <image source="../img/tilesets/recycle_items.png" trans="ffffff" width="515" height="64"/>
+ </tileset>
+ <layer id="1" name="Camada de Blocos 1" width="20" height="20">
+  <data encoding="csv">
+287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,
+185,185,185,185,185,185,287,287,287,287,287,287,287,287,185,185,185,185,185,185,
+185,448,448,448,448,448,185,287,287,287,287,287,287,185,448,448,448,448,448,185,
+185,448,448,448,448,448,448,185,287,287,287,287,185,448,448,448,448,448,448,185,
+185,448,448,448,448,448,448,448,185,287,287,185,448,448,448,448,448,448,448,185,
+185,448,448,448,448,448,448,448,448,185,185,448,448,448,448,448,448,448,448,185,
+185,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,185,
+185,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,448,
+185,448,448,448,185,448,448,448,448,448,448,448,448,448,448,185,448,448,448,448,
+185,448,448,448,185,185,448,448,448,448,448,448,448,448,185,185,448,448,448,448,
+185,448,448,448,185,287,185,448,448,448,448,448,448,185,287,185,448,448,448,448,
+185,448,448,448,185,287,287,185,448,448,448,448,185,287,287,185,448,448,448,448,
+185,448,448,448,185,287,287,287,185,448,448,185,287,287,287,185,448,448,448,185,
+185,448,448,448,185,287,287,287,287,185,185,287,287,287,287,185,448,448,448,185,
+185,448,448,448,185,287,287,287,287,287,287,287,287,287,287,185,448,448,448,185,
+185,448,448,448,185,287,287,287,287,287,287,287,287,287,287,185,448,448,448,185,
+185,448,448,448,185,287,287,287,287,287,287,287,287,287,287,185,448,448,448,185,
+185,448,448,448,185,287,287,287,287,287,287,287,287,287,287,185,448,448,448,185,
+185,185,185,185,185,287,287,287,287,287,287,287,287,287,287,185,185,185,185,185,
+287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287,287
+</data>
+ </layer>
+ <objectgroup id="2" name="Camada de Objetos 1">
+  <object id="81" name="ground" x="1.15489" y="16.9383" width="93.5459" height="13.4737"/>
+  <object id="82" name="ground" x="95.4707" y="32.3368" width="16.1684" height="14.6286"/>
+  <object id="84" name="ground" x="112.794" y="48.8902" width="15.7835" height="15.0135"/>
+  <object id="85" name="ground" x="127.808" y="63.9038" width="16.1684" height="15.3985"/>
+  <object id="86" name="ground" x="144.361" y="80.4571" width="30.797" height="15.7835"/>
+  <object id="87" name="ground" x="175.543" y="64.6737" width="16.9383" height="14.6286"/>
+  <object id="88" name="ground" x="192.096" y="48.5053" width="14.6286" height="13.8586"/>
+  <object id="89" name="ground" x="208.65" y="31.9519" width="15.0135" height="15.3985"/>
+  <object id="90" name="ground" x="224.433" y="16.5534" width="95.0857" height="15.0135"/>
+  <object id="91" name="ground" x="304.505" y="32.3368" width="14.6286" height="78.9173"/>
+  <object id="92" name="ground" x="239.832" y="127.808" width="16.5534" height="175.543"/>
+  <object id="93" name="ground" x="257.155" y="288.337" width="62.3639" height="16.5534"/>
+  <object id="94" name="ground" x="304.12" y="191.711" width="15.3985" height="112.409"/>
+  <object id="97" name="ground" x="16.5534" y="287.567" width="63.1338" height="16.1684"/>
+  <object id="98" name="ground" x="63.9038" y="127.423" width="15.7835" height="160.529"/>
+  <object id="99" name="ground" x="79.6872" y="143.976" width="16.5534" height="15.7835"/>
+  <object id="100" name="ground" x="95.8556" y="160.144" width="15.7835" height="15.7835"/>
+  <object id="101" name="ground" x="112.409" y="176.313" width="15.7835" height="15.0135"/>
+  <object id="102" name="ground" x="128.577" y="190.941" width="15.3985" height="16.5534"/>
+  <object id="103" name="ground" x="176.313" y="192.866" width="16.1684" height="14.2436"/>
+  <object id="104" name="ground" x="192.481" y="175.928" width="15.3985" height="16.5534"/>
+  <object id="106" name="ground" x="208.265" y="160.144" width="15.7835" height="16.1684"/>
+  <object id="107" name="ground" x="223.278" y="143.976" width="16.1684" height="15.3985"/>
+  <object id="108" name="ground" x="0.384962" y="31.182" width="15.0135" height="273.323"/>
+  <object id="109" name="recycle11" x="148.595" y="145.131" width="7.31429" height="10.7789"/>
+  <object id="110" name="recycle12" x="259.465" y="65.8286" width="8.46917" height="8.85414"/>
+  <object id="111" name="recycle12" x="35.8015" y="147.441" width="8.85414" height="8.46917"/>
+  <object id="112" name="recycle11" x="33.4917" y="209.035" width="11.1639" height="9.62406"/>
+  <object id="113" name="recycle10" x="68.5233" y="81.2271" width="7.69925" height="11.1639"/>
+  <object id="114" name="recycle10" x="278.328" y="163.224" width="6.92932" height="10.394"/>
+  <object id="115" name="recycle10" x="275.633" y="212.499" width="7.69925" height="8.08421"/>
+  <object id="116" name="danger" x="16.9383" y="31.9519" width="45.8105" height="254.075"/>
+  <object id="117" name="danger" x="63.5188" y="95.4707" width="238.292" height="30.412"/>
+  <object id="118" name="danger" x="102.4" y="128.192" width="105.48" height="31.182"/>
+  <object id="119" name="danger" x="144.361" y="161.299" width="29.6421" height="43.8857"/>
+  <object id="120" name="danger" x="256.385" y="32.7218" width="45.4256" height="61.594"/>
+  <object id="121" name="danger" x="259.08" y="126.653" width="43.1158" height="158.605"/>
+  <object id="122" name="danger" x="64.2887" y="33.4917" width="28.8722" height="59.2842"/>
+  <object id="123" name="danger" x="194.021" y="65.0586" width="60.8241" height="28.1023"/>
+  <object id="124" name="ground" x="0.384963" y="316.824" width="319.134" height="3.0797"/>
+  <object id="126" name="danger" x="96.6256" y="64.2887" width="30.0271" height="30.412"/>
+  <object id="127" name="danger" x="224.818" y="32.7218" width="30.0271" height="30.412"/>
+  <object id="128" name="ground" x="0" y="305.66" width="5.00451" height="15.0135"/>
+  <object id="132" name="ground" x="314.899" y="305.66" width="5.00451" height="14.2436"/>
+ </objectgroup>
+</map>

@@ -2,13 +2,14 @@ import pygame
 from lib.config import *
 
 class Text:
-    def __init__(self,text, font_size, x, y,font=MAIN_FONT):
+    def __init__(self,text, font_size, x, y,font=MAIN_FONT,orientation='topleft'):
         self.font = font
         self.text = text
         self.font_size = font_size
         self.x = x
         self.y = y
         self.display_surface = pygame.display.get_surface()
+        self.orientation = orientation
 
         # Define a fonte e o tamanho da fonte
         self.font = pygame.font.Font(font, self.font_size)
@@ -21,7 +22,10 @@ class Text:
 
         # Obtém o retângulo da superfície de texto
         self.rect = self.image.get_rect()
-        self.rect.topleft = (self.x, self.y)
+        if self.orientation == 'topleft':
+            self.rect.topleft = (self.x, self.y)
+        else:
+            self.rect.center = (self.x,self.y)
         
     def draw_box(self,boxSize,boxPos,surface,drawBorder=False,borderWidth=1):
         text_box = pygame.Surface(boxSize)
@@ -41,7 +45,7 @@ class Text:
         surface.blit(self.image, self.rect.topleft)
         
 class Button(Text):
-    def __init__(self,text,font_size,x,y,font=MAIN_FONT):
+    def __init__(self,text,font_size,x,y,font=MAIN_FONT,orientation='topleft'):
         super().__init__(text,font_size,x,y,font=MAIN_FONT)
         
         self.last_clicked_time = 0

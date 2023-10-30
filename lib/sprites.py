@@ -1,4 +1,4 @@
-import pygame,math,random
+import pygame,math,random,json
 
 import lib.gameData as gameData
 from lib.text import *
@@ -154,8 +154,9 @@ class Player(pygame.sprite.Sprite):
                     Text(f"ATAQUE: {gameData.player_data['atk']}",32,20,80),
                     Text(f"DEFESA: {gameData.player_data['def']}",32,20,140),
                     Text(f"POÇÃO: {gameData.player_data['potion']}",32,20,300),
-                    Text(f"EXP: {gameData.player_data['atk']}",32,20,360),
-                    Text(f"TOKENS: {gameData.player_data['atk']}",32,20,420),
+                    Text(f"EXP: {gameData.player_data['exp']}",32,20,360),
+                    Text(f"TOKENS: {gameData.player_data['coin']}",32,20,420),
+                    Text(f"TEMPO: {gameData.player_data['time']}",32,20,500)
                     ]
         for text in menu_text:
             text.draw(menu_surface)
@@ -204,6 +205,13 @@ class Player(pygame.sprite.Sprite):
                 self.snip = 1
                 if self.text_index >= len(self.current_npc.text):
                     self.text_index = 0  
+                    if self.current_npc.is_save_point == True:
+                        self.hitbox.y+=50
+                        with open("player-data.txt",'w') as store_data:
+                            json.dump(gameData.player_data,store_data)
+                    elif self.current_npc.is_potion == True:
+                        gameData.player_data['hp'] = gameData.player_data['hp_max']
+                    
                     self.dialog_open = self.pause = False
 
     def exclamation_emote(self):
@@ -212,6 +220,7 @@ class Player(pygame.sprite.Sprite):
         ex_rect = ex_emote.get_rect()
         ex_rect.center = (WIDTH/2,HEIGHT/2)
         self.surface.blit(ex_emote,ex_rect)  
+        
     def update(self):
         if self.pause == False:
             self.movement_input()
@@ -223,7 +232,7 @@ class Player(pygame.sprite.Sprite):
             self.menu_screen()    
 
 class Npc(pygame.sprite.Sprite):
-    def __init__(self,image,pos,text,group,item=None):
+    def __init__(self,image,pos,text,group,is_save_point=False,is_potion=False,is_boss=False):
         super().__init__(group)
         
         self.text = text
@@ -235,6 +244,10 @@ class Npc(pygame.sprite.Sprite):
         
         self.rect = self.image.get_rect(center = pos)
         self.hitbox = self.rect.inflate(5,5)
+        self.is_save_point = is_save_point
+        self.is_potion = is_potion
+        self.is_boss = is_boss
+        
             
         
 class Tile(pygame.sprite.Sprite):

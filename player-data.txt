@@ -1,0 +1,1 @@
+{"pos_x": 186, "pos_y": 230, "map": "map/CENTRAL.tmx", "hp_max": 20, "hp": 20, "atk": 10, "def": 10, "coin": 0, "potion": 3, "exp": 0, "lvl": 1, "time": "0:0"}

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="123">
  <tileset firstgid="1" name="16x16_terrain_Denzi130216-4" tilewidth="16" tileheight="16" tilecount="1550" columns="50">
-  <image source="16x16_terrain_Denzi130216-4.png" width="800" height="496"/>
+  <image source="../img/tilesets/16x16_terrain_Denzi130216-4.png" width="800" height="496"/>
  </tileset>
  <tileset firstgid="1551" name="recycle_items" tilewidth="16" tileheight="16" tilecount="128" columns="32">
-  <image source="recycle_items.png" width="515" height="64"/>
+  <image source="../img/tilesets/recycle_items.png" width="515" height="64"/>
  </tileset>
  <tileset firstgid="1679" name="16x16_terrain_Denzi130216-4" tilewidth="16" tileheight="16" tilecount="1550" columns="50">
-  <image source="16x16_terrain_Denzi130216-4.png" width="800" height="496"/>
+  <image source="../img/tilesets/16x16_terrain_Denzi130216-4.png" width="800" height="496"/>
  </tileset>
  <layer id="1" name="Camada de Blocos 1" width="20" height="20">
   <data encoding="csv">
 212,212,212,212,212,162,162,162,162,86,87,88,93,94,95,96,97,98,99,100,
-212,212,212,212,212,162,162,162,162,136,137,138,143,144,145,146,147,148,149,150,
+212,212,212,212,212,162,162,162,162,136,357,138,143,144,145,146,147,148,149,150,
 212,212,212,212,162,162,162,162,162,186,187,188,193,194,195,196,197,198,199,200,
 212,212,212,212,212,162,162,162,162,305,306,306,243,244,245,246,247,248,249,250,
 212,212,212,162,162,162,162,162,305,305,306,306,293,294,295,296,297,298,299,300,
@@ -28,9 +28,9 @@
 212,212,212,162,162,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
 212,212,212,162,162,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
 212,212,212,212,212,162,162,162,305,306,306,306,316,316,316,316,316,316,316,316,
-212,212,212,212,212,340,341,342,306,306,306,306,316,316,316,316,316,316,316,316,
-212,212,212,212,162,390,391,392,306,306,306,306,316,316,316,316,316,316,316,316,
-212,212,212,212,162,440,441,442,306,306,306,306,316,316,316,316,316,316,316,316
+212,212,212,212,212,162,162,162,306,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,162,162,162,306,306,306,306,316,316,316,316,316,316,316,316,
+212,212,212,212,162,162,162,162,306,306,306,306,316,316,316,316,316,316,316,316
 </data>
  </layer>
  <objectgroup id="4" name="Camada de Objetos 1">
