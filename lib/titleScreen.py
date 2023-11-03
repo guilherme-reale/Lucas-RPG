@@ -12,6 +12,7 @@ class TitleScreen:
         self.event = 'TITLE SCREEN'
     
     def make_title(self,screen,map):
+     
         screen_image = pygame.image.load("img/Title Screen/TITLE-SCREEN.png").convert_alpha()
         screen_image = pygame.transform.scale(screen_image,(1280,720))
         screen.blit(screen_image,(0,0))
@@ -35,7 +36,8 @@ class TitleScreen:
         
         if new_game_collision and mouseKeys[0]:
             gameData.player_data = gameData.player_data_default
-            map.create_map(gameData.player_data['map'])
+            gameData.player_data['map'] = MAP_CENTRAL
+            map.create_map(gameData.player_data['map'])                
             self.event = "OVERWORLD"
         elif load_game_collision and mouseKeys[0]:
             try:

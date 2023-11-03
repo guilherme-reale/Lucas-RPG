@@ -47,7 +47,9 @@ class PlayerBattle:
             'hp': gameData.player_data['hp'],
             'hp_max': gameData.player_data['hp_max'],
             'atk': gameData.player_data['atk'],
+            'atk_max': gameData.player_data['atk'],
             'def': gameData.player_data['def'],
+            'def_max': gameData.player_data['def'],
             'exp': gameData.player_data['exp'],
             'lvl': gameData.player_data['lvl'],
             'coin': gameData.player_data['coin'],
@@ -70,7 +72,7 @@ class PlayerBattle:
         if self.stats['coin'] >= 20:
             self.text.add_message(f"Lucas usou magia: {damage} de dano!")
             enemy.hp = max(enemy.hp - damage,0)
-            self.stats['coin'] = max(self.stats['coin'] - 20,0)
+            self.stats['coin'] -= 20
             return 1
         else:
             self.text.add_message("Lucas não tem tokens o suficiente!")
@@ -110,13 +112,15 @@ class PlayerBattle:
             new_def = random.randint(0,8)//3
             self.text.add_message(f"+{new_hp} de hp! + {new_atk} de ataque! +{new_def} de defesa!")
             self.stats['hp_max']+=new_hp
-            self.stats['atk']+=new_atk
-            self.stats['def']+=new_def
+            self.stats['atk_max']+=new_atk
+            self.stats['def_max']+=new_def
         
         
     def update_stats(self):
         gameData.player_data['hp'] = self.stats['hp']
         gameData.player_data['hp_max'] = self.stats['hp_max']
+        gameData.player_data['atk'] = self.stats['atk_max']
+        gameData.player_data['def'] = self.stats['def_max']
         gameData.player_data['exp'] = self.stats['exp']
         gameData.player_data['lvl'] = self.stats['lvl']
         gameData.player_data['coin'] = self.stats['coin']

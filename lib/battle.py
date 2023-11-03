@@ -88,7 +88,7 @@ class Battle:
                 
         elif self.state == BattleState.RUN:
             self.player.update_stats()
-            self.player = PlayerBattle(self.buttons,self.text_display)
+            
             self.counter+=0.1
             if self.counter >= 12:
                 self.counter = 0
@@ -102,7 +102,7 @@ class Battle:
                 self.player.winnings(self.enemy)
                 self.player.level_up()
                 self.player.update_stats()
-                self.player = PlayerBattle(self.buttons,self.text_display)
+                
                 self.done = True
             self.counter+=0.1
             if self.counter>=12:
@@ -116,13 +116,14 @@ class Battle:
             if not self.done:
                 self.text_display.add_message("Lucas foi derrotado!")
                 self.done = True
-            self.player = PlayerBattle(self.buttons,self.text_display)
+            
             self.counter+=0.1
             if self.counter >= 12:
                 self.done = False
                 self.counter = 0
                 self.text_display.lines.clear()
                 self.load_enemy = False
+                
                 self.event = 'GAME OVER'   
             
                 
@@ -143,6 +144,7 @@ class Battle:
 
     def run(self,screen,events):
         if not self.load_enemy:
+            self.player = PlayerBattle(self.buttons,self.text_display)
             self.enemy = Enemy(self.text_display)
             self.load_enemy = True
         

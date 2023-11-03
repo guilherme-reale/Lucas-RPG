@@ -10,7 +10,7 @@ player_data = {
     'hp': 20,
     'atk':10,
     'def':10,
-    'coin':0,
+    'coin':20,
     'potion':3,
     'exp':0,
     'lvl':1,
@@ -36,8 +36,8 @@ player_data_default = {
 
 papelao_stats = {
     'hp_max': 20 + random.randint(0,3),
-    'atk': 10 + random.randint(0,2),
-    'def': 5 + random.randint(0,1),
+    'atk': 8 + random.randint(0,2),
+    'def': 4 + random.randint(0,1),
     'coin': 5,
     'exp': 40
     
@@ -75,9 +75,9 @@ toxico_stats = {
 }
 
 boss_stats = {
-    'hp_max': 20 + random.randint(0,3),
-    'atk': 10 + random.randint(0,2),
-    'def': 5 + random.randint(0,1),
+    'hp_max': 200,
+    'atk': 30,
+    'def': 20,
     'coin': 20,
     'exp': 65
     

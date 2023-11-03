@@ -129,17 +129,26 @@ class Map:
         pos_y = self.player.hitbox.y
         
         if gameData.player_data['map'] == MAP_CENTRAL:
-            if pos_x < 40*4 and pos_y in range(141*4,176*4):
+            if pos_x < 40*4 and pos_y in range(140*4,180*4):
                 self.load_map(MAP_METAL,(305*4,144*4))
-            elif pos_x > 275*4 and pos_y in range(141*4,176*4):
+            elif pos_x > 275*4 and pos_y in range(140*4,180*4):
                 self.load_map(MAP_PAPELAO,(11*4,161*4))
-            elif pos_x in range(142*4,177*4) and pos_y < 40*4:
+            elif pos_x in range(140*4,180*4) and pos_y < 40*4:
                 self.load_map(MAP_TOXICO,(271*4,316*4))
-            elif pos_x in range (142*4,177*4) and pos_y > 275*4:
+            elif pos_x in range (140*4,180*4) and pos_y > 275*4:
                 self.load_map(MAP_PLASTICO,(168*4,11*4))
-        else:
-            pass
-            
+        elif gameData.player_data['map'] == MAP_PAPELAO:
+            if pos_x < 0 and self.player.direction.x == -1:
+                self.load_map(MAP_CENTRAL,(420,420))
+        elif gameData.player_data['map'] == MAP_PLASTICO:
+            if pos_y < 0 and self.player.direction.y == -1:
+                self.load_map(MAP_CENTRAL,(420,420))
+        elif gameData.player_data['map'] == MAP_METAL:
+            if pos_x > 1280 and self.player.direction.x == 1:
+                self.load_map(MAP_CENTRAL,(420,420))  
+        elif gameData.player_data['map'] == MAP_TOXICO:
+            if pos_y > 1280 and self.player.direction.y == 1:
+                self.load_map(MAP_CENTRAL,(420,420))
             
     def load_map(self,map,pos):
         gameData.player_data['map'] = map

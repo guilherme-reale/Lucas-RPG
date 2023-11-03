@@ -42,6 +42,7 @@ class Game:
         
     def main_game(self):
         while True:
+           
             gameData.player_data['time'] = str(pygame.time.get_ticks()//(1000*3600))+":"+ str(pygame.time.get_ticks()//(1000*60)%60)
             events = pygame.event.get()
             for event in events:

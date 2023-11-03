@@ -120,8 +120,7 @@ class Player(pygame.sprite.Sprite):
         self.collision('vertical')
         self.rect.center = self.hitbox.center
         
-        gameData.player_data['pos_x'] = self.hitbox.x
-        gameData.player_data['pos_y'] = self.hitbox.y
+        
                 
         self.danger_collision()
         
@@ -206,7 +205,9 @@ class Player(pygame.sprite.Sprite):
                 if self.text_index >= len(self.current_npc.text):
                     self.text_index = 0  
                     if self.current_npc.is_save_point == True:
-                        self.hitbox.y+=50
+                        gameData.player_data['pos_x'] = 420
+                        gameData.player_data['pos_y'] = 420
+                        
                         with open("player-data.txt",'w') as store_data:
                             json.dump(gameData.player_data,store_data)
                     elif self.current_npc.is_potion == True:
