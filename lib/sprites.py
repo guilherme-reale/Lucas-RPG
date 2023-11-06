@@ -121,6 +121,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = self.hitbox.center
         
         
+        
                 
         self.danger_collision()
         
@@ -194,7 +195,7 @@ class Player(pygame.sprite.Sprite):
         if self.dialog_open and self.pause:
             #npc_text = Text(self.current_npc.text[self.text_index], 22, 0, 0)
             #npc_text.draw_box((WIDTH, HEIGHT/6), (0, 0), self.surface,True,2)
-            npc_text = ScrollingText(self.current_npc.text[self.text_index], 22, 0, 0,self.snip)
+            npc_text = ScrollingText(self.current_npc.text[self.text_index], 28, 0, 0,self.snip)
             npc_text.draw_box((WIDTH, HEIGHT/6), (0, 0), self.surface,True,2)
             self.snip+=npc_text.speed
             current_time = pygame.time.get_ticks()

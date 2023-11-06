@@ -37,8 +37,9 @@ class Game:
         self.title_screen_instance = TitleScreen()
         
         self.animation_counter = 0
-        self.time_counter = 0
-       
+        self.time_counter = 0 
+        
+        self.play_music = True      
         
     def main_game(self):
         while True:
@@ -74,59 +75,57 @@ class Game:
     
     #Movimentação no cenário
     def overworld(self):
+        if self.play_music:
+            pygame.mixer.music.load("music/music_overworld.ogg")
+            pygame.mixer.music.play(-1)
+            self.play_music = False
+        
         self.screen.fill("#5D8AA8")
         self.battle_phase.event = ''
         self.battle_phase.state = 0
         self.map.run()
         if self.map.player.battle_time == True:
+            pygame.mixer.music.fadeout(1000)
             self.map.player.pause_player()
             self.map.player.exclamation_emote()
             self.time_counter+=0.1
             if self.time_counter >=6: 
                 if self.battle_transition():
                     self.time_counter = 0
+                    self.play_music = True
                     self.event = "BATTLE"
                     
     def introduction(self):
         pass
     #tela de batalhas        
     def battle(self,events):
+        if self.play_music:
+            pygame.mixer.music.load("music/music_battle.ogg")
+            pygame.mixer.music.play(-1)
+            self.play_music = False
         self.battle_phase.run(self.screen,events)
         if self.battle_phase.event == "OVERWORLD":
             self.map.player.true_to_false()
             self.map.player.unpause_player()
+            pygame.mixer.music.fadeout(100)
+            self.play_music = True
             self.event = 'OVERWORLD'
         elif self.battle_phase.event == "GAME OVER":
+            pygame.mixer.music.fadeout(100)
+            self.play_music = True
             self.event = "GAME OVER"
             
             
     def game_over(self):
         self.screen.fill(BLACK)
-        game_over_text = Text("Lucas foi derrotado!",43,WIDTH//2,HEIGHT//2,orientation='center')
-        game_over_text.draw(self.screen)
+        image = pygame.image.load("img/Title Screen/GAME-OVER.png").convert_alpha()
+        self.screen.blit(image,(0,0))
         if pygame.mouse.get_pressed()[0]:
             self.event = "TITLE SCREEN"
     
     def battle_transition(self):
         # Usar pygame.SRCALPHA para suporte a canal alfa
         surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)  
-        # alpha = 0
-
-        # while alpha < 255:
-        #     # Preencha a superfície com uma cor preta e uma transparência baseada em 'alpha'
-        #     surface.fill((0, 0, 0, alpha))
-        #     self.screen.blit(surface, (0, 0))
-        #     # Atualiza a tela a cada quadro
-        #     pygame.display.flip()
-        #     # Atraso para controlar a velocidade de escurecimento  
-        #     pygame.time.delay(10)
-        #     # Ajuste a velocidade como desejado  
-        #     alpha += 2  
-
-        # # Quando o escurecimento estiver completo, retorne True
-        # return True
-
-        
         self.battle_phase.render(surface)
         rect = surface.get_rect()
         rect.topright = (0+self.animation_counter,0)
@@ -139,5 +138,3 @@ class Game:
             return False
         
         
-game= Game()
-game.main_game()

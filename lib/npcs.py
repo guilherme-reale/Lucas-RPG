@@ -1,15 +1,7 @@
 import pygame
 
-import lib.gameData as gameData
-from lib.sprites import Npc
-from lib.config import *
+npcs_central = []
 
-class MakeNPC:
-    def __init__(self):
-        self.npc_list = []
-    
-    def make_list(self):
-        pass
-    
-        
+npc1 = {'image':"img/NPC_s/NPC-Test.png",'pos':(405,195),'text':["Lucas"]}
+npcs_central.append(npc1)
         

@@ -5,7 +5,7 @@ from lib.sprites import *
 from lib.config import *
 from lib.camera import CameraGroup
 
-from lib.npcs import MakeNPC
+from lib.npcs import *
 import lib.gameData as gameData
 
 class Map:
@@ -33,6 +33,7 @@ class Map:
         self.tmx_data = load_pygame(map)
         self.create_visible_layer()
         self.create_object_layer()
+        self.create_npcs()
         
         if gameData.player_data['pos_x'] == None and gameData.player_data['pos_y'] == None:
             self.player_pos = (420,420)
@@ -123,7 +124,13 @@ class Map:
                 #surf = pygame.transform.scale(obj.image,(TILESIZE,TILESIZE))
                 Tile(obj.image,pos, [self.visible_sprites])
             
-
+    def create_npcs(self):
+        if gameData.player_data['map'] == MAP_CENTRAL:
+            for npc in npcs_central:
+                Npc(image = npc['image'], pos = npc['pos'], text = npc['text'], group = [self.visible_sprites,self.obstacle_sprites,self.npc_sprites])
+        
+    
+    
     def level_transition(self):
         pos_x = self.player.hitbox.x
         pos_y = self.player.hitbox.y

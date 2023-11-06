@@ -100,6 +100,9 @@ class PlayerBattle:
             return 1
     def winnings(self,enemy):
         self.text.add_message(f"Lucas ganhou {enemy.exp} de experiência e {enemy.coin} tokens!")
+        if random.randint(0,1) == 1:
+            self.text.add_message("Lucas ganhou uma poção!")
+            self.stats['potion']+=1
         self.stats['coin'] += enemy.coin
         self.stats['exp']+= enemy.exp
         self.stats['lvl'] = max(self.stats['exp']//(100+10*self.stats['lvl']),self.stats['lvl'])
