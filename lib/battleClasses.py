@@ -1,3 +1,48 @@
+"""
+Módulos:
+- pygame: Biblioteca para desenvolvimento de jogos em Python.
+- random: Módulo para geração de números aleatórios.
+
+Classes:
+- Enemy: Classe que representa um inimigo durante uma batalha.
+- PlayerBattle: Classe que representa o personagem do jogador durante uma batalha.
+
+Métodos e Atributos da Classe Enemy:
+- __init__(self, text_display, boss=False): Inicializa a classe Enemy. Determina características do inimigo com base no mapa atual.
+- enemy_attack(self, player): Realiza um ataque ao jogador, calculando o dano com base em estatísticas.
+- lower_defense(self, player): Reduz a defesa do jogador e exibe uma mensagem.
+- draw(self, screen): Desenha a imagem do inimigo na tela.
+
+Atributos da Classe Enemy:
+- boss: Indica se o inimigo é um chefe.
+- stats: Dicionário contendo as estatísticas do inimigo.
+- image, rect: Imagem e retângulo que representam visualmente o inimigo.
+- hp: Pontos de vida do inimigo.
+- text: Instância da classe Text para exibição de mensagens.
+- coin, exp: Recompensas concedidas ao jogador ao derrotar o inimigo.
+
+Métodos e Atributos da Classe PlayerBattle:
+- __init__(self, buttons, display_text): Inicializa a classe PlayerBattle. Recebe instâncias dos botões e do display de texto.
+- player_attack(self, enemy): Realiza um ataque ao inimigo, calculando o dano com base nas estatísticas do jogador.
+- player_magic(self, enemy): Realiza um ataque mágico ao inimigo, consumindo moedas e causando dano.
+- player_potion(self): Usa uma poção para recuperar pontos de vida do jogador.
+- player_run(self): Tenta fugir do inimigo com uma chance de sucesso de 1/3.
+- winnings(self, enemy): Concede recompensas ao jogador ao derrotar o inimigo.
+- level_up(self): Aumenta o nível do jogador com base na experiência acumulada.
+- update_stats(self): Atualiza as estatísticas do jogador no módulo gameData.
+
+Atributos da Classe PlayerBattle:
+- buttons: Lista de instâncias da classe Button representando os botões de ação.
+- stats: Dicionário contendo as estatísticas do jogador.
+- text: Instância da classe Text para exibição de mensagens.
+
+Módulos e Variáveis Adicionais:
+- import lib.gameData as gameData: Importa o módulo gameData.
+- from lib.text import Text: Importa a classe Text do módulo lib.text.
+- from lib.config import *: Importa variáveis de configuração globais.
+
+"""
+
 import pygame,random
 
 import lib.gameData as gameData
@@ -6,6 +51,7 @@ from lib.config import *
 
 class Enemy:
     def __init__(self,text_display,boss=False):
+        self.boss = False
         if gameData.player_data['map'] == MAP_PLASTICO:
             img = PLASTICO
             self.stats = gameData.plastico_stats
@@ -15,6 +61,10 @@ class Enemy:
         elif gameData.player_data['map'] == MAP_METAL:
             img = METAL
             self.stats = gameData.metal_stats
+        elif gameData.player_data['boss'] == 1:
+            img = TOXICO
+            self.stats = gameData.boss_stats
+            self.boss = True
         else:
             img = TOXICO
             self.stats = gameData.toxico_stats
@@ -23,7 +73,6 @@ class Enemy:
         self.rect.center = ENEMY_POSITION   
         self.hp = self.stats['hp_max']
         self.text = text_display
-        self.last_clicked_time = 0
         self.coin = random.randint(gameData.plastico_stats['coin'],gameData.plastico_stats['coin']+20)
         self.exp = gameData.plastico_stats['exp']
     
@@ -55,9 +104,7 @@ class PlayerBattle:
             'coin': gameData.player_data['coin'],
             'potion': gameData.player_data['potion'] 
         }
-        self.last_clicked_time = 0
-        self.run = False
-        self.win = False
+        
         self.text = display_text
     
     def player_attack(self,enemy):

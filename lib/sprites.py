@@ -1,3 +1,54 @@
+"""
+Módulos:
+- pygame: Biblioteca para desenvolvimento de jogos em Python.
+- math: Biblioteca de funções matemáticas.
+- random: Biblioteca para geração de números pseudoaleatórios.
+- json: Biblioteca para manipulação de dados JSON.
+- lib.gameData: Módulo para armazenar dados do jogo.
+- lib.text: Módulo contendo classes para manipulação de texto na interface do jogo.
+- lib.config: Módulo contendo configurações globais.
+
+Classes:
+- Spritesheet: Classe para carregar e extrair sprites de uma folha de sprites.
+- Player: Classe representando o personagem controlável pelo jogador.
+- Npc: Classe representando personagens não jogáveis (NPCs).
+- Tile: Classe representando tiles (elementos gráficos) no jogo.
+
+Métodos e Atributos da Classe Spritesheet:
+- __init__(file): Inicializa a classe com uma folha de sprites carregada a partir de um arquivo.
+- get_sprite(x, y, width, height, scale=1): Retorna um sprite da folha de sprites com as dimensões especificadas.
+
+Métodos e Atributos da Classe Player:
+- __init__(pos, group, obstacle_sprites, danger_sprites, npc_sprites): Inicializa a classe Player.
+- movement_input(): Lê as teclas de movimento pressionadas e ajusta a direção e orientação do jogador.
+- add_movement(arg0, arg1, arg2): Define a direção, orientação e inicia a animação do jogador.
+- idle(orientation): Atualiza a imagem do jogador para a posição padrão (idle) com base na orientação.
+- animation(orientation): Realiza a animação do jogador com base na orientação.
+- moviment(): Atualiza a posição do jogador, considerando colisões e movimentação.
+- danger_collision(): Verifica a colisão com elementos perigosos e inicia batalhas aleatórias.
+- true_to_false(): Desativa o estado de batalha do jogador.
+- pause_player(): Pausa o jogador.
+- unpause_player(): Despausa o jogador.
+- menu(): Controla a abertura/fechamento do menu.
+- menu_screen(): Exibe informações do jogador durante o jogo.
+- collision(direction): Trata colisões com obstáculos no mapa.
+- npc_collision(): Verifica a colisão do jogador com NPCs e inicia diálogos.
+- npc_text(): Controla a exibição de texto durante os diálogos com NPCs.
+- exclamation_emote(): Exibe um emoticon de exclamação acima do jogador.
+- update(): Atualiza o estado do jogador.
+
+Métodos e Atributos da Classe Npc:
+- __init__(image, pos, text, group, is_save_point=False, is_potion=False, is_boss=False): Inicializa a classe Npc.
+- text: Lista de strings representando o diálogo do NPC.
+- is_save_point: Indica se o NPC é um ponto de salvamento.
+- is_potion: Indica se o NPC fornece uma poção.
+- is_boss: Indica se o NPC é um chefe (inicia batalha especial).
+
+Métodos e Atributos da Classe Tile:
+- __init__(image, pos, group, origin="center"): Inicializa a classe Tile.
+- origin: Define o ponto de origem da posição do tile ('center' ou 'topleft').
+"""
+
 import pygame,math,random,json
 
 import lib.gameData as gameData
@@ -119,6 +170,7 @@ class Player(pygame.sprite.Sprite):
         self.hitbox.y += dy
         self.collision('vertical')
         self.rect.center = self.hitbox.center
+        #print(self.hitbox.center)
         
         
         
@@ -213,6 +265,10 @@ class Player(pygame.sprite.Sprite):
                             json.dump(gameData.player_data,store_data)
                     elif self.current_npc.is_potion == True:
                         gameData.player_data['hp'] = gameData.player_data['hp_max']
+                    elif self.current_npc.is_boss:
+                        gameData.player_data['boss'] = 1
+                        
+                        self.battle_time = True
                     
                     self.dialog_open = self.pause = False
 
@@ -244,13 +300,12 @@ class Npc(pygame.sprite.Sprite):
         except:
             self.image = image
         
+        self.image = pygame.transform.scale(self.image,(TILESIZE,TILESIZE))
         self.rect = self.image.get_rect(center = pos)
         self.hitbox = self.rect.inflate(5,5)
         self.is_save_point = is_save_point
         self.is_potion = is_potion
-        self.is_boss = is_boss
-        
-            
+        self.is_boss = is_boss                 
         
 class Tile(pygame.sprite.Sprite):
     def __init__(self,image,pos,group,origin="center"):
@@ -267,12 +322,6 @@ class Tile(pygame.sprite.Sprite):
         elif origin =='topleft':
             self.rect.topleft = pos
     
-class DangerZone(pygame.sprite.Sprite):
-    def __init__(self,pos,group):
-        super().__init__(group)
-        self.image = pygame.Surface((TILESIZE,TILESIZE))
-        self.image.fill((0, 0, 255))
-        self.rect = self.image.get_rect(center=pos)
         
 
         

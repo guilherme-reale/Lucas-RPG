@@ -1,3 +1,29 @@
+"""
+CameraGroup - Classe de Grupo de Sprites com Funcionalidade de Câmera em Pygame
+
+Módulos:
+- pygame: Biblioteca para desenvolvimento de jogos em Python.
+- config: Módulo contendo configurações globais.
+
+Classe:
+- CameraGroup: Classe derivada de pygame.sprite.Group com funcionalidades de câmera.
+
+Métodos da Classe CameraGroup:
+- __init__(): Inicializa a classe CameraGroup. Configura a superfície de exibição e define um deslocamento inicial.
+- custom_draw(player): Método personalizado para desenhar sprites na tela considerando um deslocamento (câmera).
+    - player: Objeto do tipo Sprite representando o jogador na tela.
+
+Atributos da Classe CameraGroup:
+- display_surface: Superfície de exibição obtida a partir do pygame.display.get_surface().
+- offset: Vetor 2D (pygame.math.Vector2) representando o deslocamento da câmera em relação ao jogador.
+
+Métodos da Classe CameraGroup (Continuação):
+- custom_draw(player): Método personalizado para desenhar sprites na tela considerando um deslocamento (câmera).
+    - Itera sobre os sprites no grupo, ordenando-os verticalmente pelo centro de seus retângulos.
+    - Calcula a posição relativa do sprite em relação à câmera e o desenha na superfície de exibição.
+    - Desenha o sprite do jogador na posição ajustada pela câmera.
+"""
+
 import pygame
 
 from lib.config import *

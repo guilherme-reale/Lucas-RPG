@@ -1,3 +1,36 @@
+"""
+Módulos:
+- pygame: Biblioteca para desenvolvimento de jogos em Python.
+- pytmx.util_pygame: Módulo para carregar mapas Tiled (TMX) em jogos Pygame.
+- lib.sprites: Módulo contendo a classe Spritesheet e outras classes relacionadas a sprites.
+- lib.config: Módulo contendo configurações globais.
+- lib.camera: Módulo contendo a classe CameraGroup para manipulação da câmera.
+- lib.npcs: Módulo contendo informações sobre NPCs e diálogos.
+- lib.gameData: Módulo para armazenar dados do jogo.
+
+Classes:
+- Map: Classe responsável pela criação e execução de mapas no jogo.
+
+Métodos e Atributos da Classe Map:
+- __init__(): Inicializa a classe Map. Carrega a superfície de exibição e define elementos iniciais.
+- create_map(map): Cria um novo mapa com base no arquivo TMX fornecido.
+- create_visible_layer(): Cria os elementos visíveis do mapa (tiles) e adiciona ao grupo visível.
+- create_object_layer(): Cria os elementos do mapa (objeto) e adiciona aos grupos visível, de obstáculos, e perigos.
+- create_npcs(): Cria NPCs no mapa com base nas informações definidas.
+- level_transition(): Verifica se o jogador está em uma posição de transição entre mapas e realiza a transição.
+- load_map(map, pos): Carrega um novo mapa e define a posição do jogador.
+- run(): Executa o loop principal do mapa, atualizando e desenhando os elementos visíveis.
+
+Atributos da Classe Map:
+- display_surface: Superfície de exibição obtida a partir do pygame.display.get_surface().
+- recycle_sprites: Instância da classe Spritesheet para os sprites de reciclagem.
+- entrance, entranceS, entranceW, entranceE, entranceN: Entradas para mapas adjacentes.
+- previous_map: Armazena o nome do mapa anterior.
+- visible_sprites, obstacle_sprites, danger_sprites, npc_sprites: Grupos de sprites para elementos visíveis, obstáculos, perigos e NPCs.
+- tmx_data: Dados do mapa carregado a partir de um arquivo TMX.
+- player: Instância da classe Player para representar o personagem controlável no mapa.
+"""
+
 import pygame
 from pytmx.util_pygame import load_pygame
 
@@ -146,16 +179,16 @@ class Map:
                 self.load_map(MAP_PLASTICO,(168*4,11*4))
         elif gameData.player_data['map'] == MAP_PAPELAO:
             if pos_x < 0 and self.player.direction.x == -1:
-                self.load_map(MAP_CENTRAL,(420,420))
+                self.load_map(MAP_CENTRAL,(1049,571))
         elif gameData.player_data['map'] == MAP_PLASTICO:
             if pos_y < 0 and self.player.direction.y == -1:
-                self.load_map(MAP_CENTRAL,(420,420))
+                self.load_map(MAP_CENTRAL,(599,1031))
         elif gameData.player_data['map'] == MAP_METAL:
             if pos_x > 1280 and self.player.direction.x == 1:
-                self.load_map(MAP_CENTRAL,(420,420))  
+                self.load_map(MAP_CENTRAL,(200,590))  
         elif gameData.player_data['map'] == MAP_TOXICO:
             if pos_y > 1280 and self.player.direction.y == 1:
-                self.load_map(MAP_CENTRAL,(420,420))
+                self.load_map(MAP_CENTRAL,(590,146))
             
     def load_map(self,map,pos):
         gameData.player_data['map'] = map

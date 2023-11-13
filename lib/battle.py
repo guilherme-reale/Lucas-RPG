@@ -1,3 +1,42 @@
+"""
+Módulos:
+- pygame: Biblioteca para desenvolvimento de jogos em Python.
+- random: Módulo para geração de números aleatórios.
+
+Classes:
+- BattleState: Enumeração para definir estados da batalha.
+- Battle: Classe responsável pela lógica e renderização do sistema de batalha.
+
+Métodos e Atributos da Classe BattleState:
+- PLAYER, ENEMY, GAME_OVER, VICTORY, RUN: Constantes para representar os estados da batalha.
+
+Métodos e Atributos da Classe Battle:
+- __init__(): Inicializa a classe Battle. Define os elementos gráficos da interface de batalha e instâncias de classes relacionadas.
+- handle_events(events): Manipula eventos do mouse durante a batalha.
+- update(): Atualiza o estado da batalha com base nas ações dos jogadores e inimigos.
+- render(screen): Renderiza a interface gráfica da batalha na tela.
+- run(screen, events): Executa o loop principal da batalha, renderizando e atualizando continuamente.
+
+Atributos da Classe Battle:
+- state: Estado atual da batalha (PLAYER, ENEMY, GAME_OVER, VICTORY, RUN).
+- main_rect, main_rect_rect: Superfície gráfica e retângulo correspondente para a interface principal da batalha.
+- rect_size, rect_font: Tamanho do retângulo e fonte utilizados na interface.
+- atacar, magia, pocao, correr: Instâncias da classe Button representando opções de ação do jogador.
+- buttons: Lista contendo as instâncias de botões de ação.
+- text_display: Instância da classe TextDisplay para exibição de mensagens na tela.
+- turn_count: Contador para controlar a contagem de turnos.
+- processing, previous_time: Flags para controle de eventos e tempo antigo de clique.
+- player: Instância da classe PlayerBattle representando o jogador na batalha.
+- show_hp, show_lvl: Instâncias da classe Text para exibir informações de HP e nível do jogador.
+- event, counter, done, load_enemy: Variáveis para controle de eventos, contagem e estado de carga do inimigo.
+
+Métodos e Atributos Adicionais:
+- handle_events(): Manipula os eventos do mouse durante a batalha, acionando as ações dos botões.
+- update(): Atualiza o estado da batalha com base nas ações dos jogadores e inimigos.
+- render(): Renderiza a interface gráfica da batalha na tela.
+- run(): Executa o loop principal da batalha, renderizando e atualizando continuamente.
+"""
+
 import pygame, random
 
 from lib.battleClasses import PlayerBattle,Enemy
@@ -109,8 +148,12 @@ class Battle:
                 self.done = False
                 self.counter = 0
                 self.text_display.lines.clear()
-                self.load_enemy = False
-                self.event = 'OVERWORLD'
+                
+                if self.enemy.boss:
+                    self.event = 'ENDING'
+                else:
+                    self.load_enemy = False
+                    self.event = 'OVERWORLD'
         
         elif self.state == BattleState.GAME_OVER:
             if not self.done:

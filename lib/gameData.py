@@ -1,3 +1,17 @@
+"""
+GameData: contém variáveis globais de controle das informações do jogador e atributos dos inimigos
+variáveis:
+
+- player_data: contém atributos e informações do jogador.
+- player_data_default: usada para sobrescrever as informações de player_data quando o jogador clica em novo jogo.
+- papelao_stats: atributos do monstro de papelão.
+- plastico_stats: atributos do monstro de plástico.
+- metal_stats: atributos do monstro de metal.
+- toxico_stats: atributos do monstro tóxico.
+- boss_stats: atributos do chefe final.
+"""
+
+
 import pygame,random
 
 from lib.config import *
@@ -14,7 +28,8 @@ player_data = {
     'potion':3,
     'exp':0,
     'lvl':1,
-    'time':0 
+    'time': 0,
+    'boss': 0 
     
         }
 
@@ -30,7 +45,8 @@ player_data_default = {
     'potion':3,
     'exp':0,
     'lvl':1,
-    'time': 0
+    'time': 0,
+    'boss': 0
     
         }
 

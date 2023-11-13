@@ -1,3 +1,41 @@
+"""
+As Aventuras Ecológicas de Lucas - Jogo em Python utilizando a biblioteca Pygame
+
+Módulos:
+- gameData: Módulo para armazenar dados do jogo.
+- map: Módulo para gerenciar o mapa do jogo.
+- battle: Módulo para controlar as batalhas no jogo.
+- text: Módulo para manipular texto na interface do jogo.
+- titleScreen: Módulo para gerenciar a tela inicial do jogo.
+- config: Módulo contendo configurações globais.
+
+Classe:
+- Game: Classe principal que controla o fluxo do jogo.
+
+Métodos da Classe Game:
+- __init__(): Inicializa o jogo, configura a janela, carrega recursos e instância objetos.
+- main_game(): Loop principal do jogo que gerencia os eventos e chama os métodos adequados.
+- title_screen(): Método para exibir a tela inicial do jogo.
+- overworld(): Método para controlar a fase de exploração do mapa.
+- introduction(): Método para exibir a introdução do jogo (vazio no momento).
+- battle(): Método para controlar as batalhas no jogo.
+- game_over(): Método para exibir a tela de Game Over.
+- ending(): Método para exibir a tela de finalização do jogo.
+- battle_transition(): Método para realizar a transição visual entre a exploração e as batalhas.
+
+Atributos da Classe Game:
+- screen: Janela principal do jogo.
+- clock: Relógio para controlar a taxa de quadros.
+- font: Fonte para renderizar texto.
+- event: Estado atual do jogo ('TITLE SCREEN', 'INTRODUCTION', 'OVERWORLD', 'BATTLE', 'GAME OVER', 'ENDING').
+- map: Instância do mapa do jogo.
+- battle_phase: Instância do gerenciador de batalhas.
+- title_screen_instance: Instância da tela inicial.
+- animation_counter: Contador para animações visuais.
+- time_counter: Contador de tempo para eventos específicos.
+- play_music: Flag para controlar a reprodução de música no jogo.
+"""
+
 import pygame,sys,json
 
 import lib.gameData as gameData
@@ -20,7 +58,7 @@ class Game:
         #fonte dos textos
         self.font = pygame.font.Font(MAIN_FONT,32)
         #Eventos definem o que será mostrado em cada momento do jogo
-        self.event = 'TITLE SCREEN'
+        self.event = "TITLE SCREEN"
     
         game_icon = pygame.transform.scale2x(pygame.image.load("img/NPC_s/NPC-Test.png").convert_alpha())
         pygame.display.set_icon(game_icon)
@@ -64,6 +102,10 @@ class Game:
                 self.battle(events)
             elif self.event == 'GAME OVER':
                 self.game_over()
+            elif self.event == 'ENDING':
+                self.ending()
+                
+                
             pygame.display.update()
             self.clock.tick(FPS)
     
@@ -114,6 +156,10 @@ class Game:
             pygame.mixer.music.fadeout(100)
             self.play_music = True
             self.event = "GAME OVER"
+        elif self.battle_phase.event == 'ENDING':
+            pygame.mixer.music.fadeout(100)
+            self.play_music = True
+            self.event = "ENDING"
             
             
     def game_over(self):
@@ -122,6 +168,19 @@ class Game:
         self.screen.blit(image,(0,0))
         if pygame.mouse.get_pressed()[0]:
             self.event = "TITLE SCREEN"
+    
+    def ending(self):
+        if self.play_music:
+            pygame.mixer.music.load("music/music_ending.mp3")
+            pygame.mixer.music.play(-1)
+            self.play_music = False
+        self.screen.fill(BLACK)
+        text1 = Text("Parabéns, você derrotou os monstros!",50,WIDTH//2,100,orientation='center')
+        text2 = Text("Agora, para que não apareçam mais, temos que manter a cidade limpa.",30,WIDTH//2,200,orientation='center')
+        text3 = Text("Vamos reciclar!",30,WIDTH//2,300,orientation='center')
+        
+        for text in text1, text2, text3:
+            text.draw(self.screen)
     
     def battle_transition(self):
         # Usar pygame.SRCALPHA para suporte a canal alfa

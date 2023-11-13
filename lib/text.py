@@ -1,3 +1,67 @@
+"""
+Módulos:
+- pygame: Biblioteca para desenvolvimento de jogos em Python.
+
+Classes:
+- Text: Classe que representa um bloco de texto na tela.
+- Button: Subclasse de Text que representa um botão clicável.
+- ScrollingText: Subclasse de Text que exibe um texto com rolagem.
+- TextDisplay: Classe que gerencia e exibe um conjunto de mensagens na tela.
+
+Métodos e Atributos da Classe Text:
+- __init__(self, text, font_size, x, y, font=MAIN_FONT, orientation='topleft'): Inicializa a classe Text.
+- draw_box(self, boxSize, boxPos, surface, drawBorder=False, borderWidth=1): Desenha um bloco de texto com caixa ao redor.
+- new_text(self, new_text): Atualiza o texto exibido.
+- draw(self, surface): Desenha o texto na superfície especificada.
+
+Atributos da Classe Text:
+- font: Fonte usada para renderizar o texto.
+- text: Conteúdo do texto.
+- font_size, x, y: Tamanho da fonte e posições x e y do texto.
+- display_surface: Superfície de exibição do pygame.
+- orientation: Orientação do texto (topleft ou center).
+- color: Cor do texto (branco por padrão).
+- image, rect: Superfície e retângulo do texto renderizado.
+
+Métodos e Atributos da Classe Button (Subclasse de Text):
+- __init__(self, text, font_size, x, y, font=MAIN_FONT, orientation='topleft'): Inicializa a classe Button.
+- hover(self): Altera a cor do texto quando o mouse está sobre o botão.
+- on_click(self): Ativa o estado de clique do botão.
+- release_click(self): Desativa o estado de clique do botão.
+- update(self): Atualiza o botão para resposta visual durante a interação.
+
+Atributos Adicionais da Classe Button:
+- last_clicked_time: Tempo da última vez que o botão foi clicado.
+- is_mouse_pressed: Estado de pressionamento do botão.
+
+Métodos e Atributos da Classe ScrollingText (Subclasse de Text):
+- __init__(self, text, font_size, x, y, snip, font=MAIN_FONT): Inicializa a classe ScrollingText.
+- draw_box(self, boxSize, boxPos, surface, drawBorder=False, borderWidth=1): Desenha um bloco de texto com rolagem em uma caixa.
+- draw_scroll(self, surface): Atualiza o texto com rolagem, exibindo uma parte definida pelo parâmetro snip.
+
+Atributos Adicionais da Classe ScrollingText:
+- current_text: Texto atualmente visível após a rolagem.
+- speed: Velocidade de rolagem.
+- snip: Tamanho do texto a ser exibido.
+
+Métodos e Atributos da Classe TextDisplay:
+- __init__(self, font_size, x, y, max_lines, width, height, font=MAIN_FONT): Inicializa a classe TextDisplay.
+- add_message(self, message): Adiciona uma mensagem à lista de mensagens, mantendo um número máximo definido por max_lines.
+- draw(self, screen): Desenha as mensagens na tela.
+- clear(self): Limpa a lista de mensagens.
+
+Atributos da Classe TextDisplay:
+- font: Fonte usada para renderizar as mensagens.
+- x, y: Posições x e y do bloco de mensagens.
+- max_lines: Número máximo de linhas de mensagem que o bloco pode conter.
+- width, height: Largura e altura máximas do bloco de mensagens.
+- lines: Lista de mensagens exibidas.
+
+Módulos e Variáveis Adicionais:
+- from lib.config import *: Importa variáveis de configuração globais.
+
+"""
+
 import pygame
 from lib.config import *
 

@@ -1,3 +1,28 @@
+"""
+Módulos:
+- pygame: Biblioteca para desenvolvimento de jogos em Python.
+- json: Módulo para trabalhar com dados JSON.
+
+Classes:
+- TitleScreen: Classe que representa a tela inicial do jogo.
+
+Métodos e Atributos da Classe TitleScreen:
+- __init__(): Inicializa a classe TitleScreen. Cria instâncias dos botões "Novo Jogo" e "Continuar Jogo".
+- make_title(screen, map): Renderiza a tela inicial com uma imagem de fundo, título e botões, e realiza a transição para o mapa indicado.
+- render(screen): Renderiza os botões na tela.
+- transition(map): Realiza a transição para o mapa indicado com base nas interações do mouse.
+
+Atributos da Classe TitleScreen:
+- new_game, load_game: Instâncias da classe Button representando os botões "Novo Jogo" e "Continuar Jogo".
+- event: Variável que controla o evento atual da tela inicial ("TITLE SCREEN", "OVERWORLD", etc.).
+
+Métodos e Atributos Adicionais:
+- __init__(): Inicializa a classe TitleScreen com instâncias dos botões.
+- make_title(screen, map): Renderiza a tela inicial com uma imagem de fundo, título e botões, e realiza a transição para o mapa indicado.
+- render(screen): Renderiza os botões na tela.
+- transition(map): Realiza a transição para o mapa indicado com base nas interações do mouse.
+"""
+
 import pygame,json
 
 import lib.gameData as gameData
